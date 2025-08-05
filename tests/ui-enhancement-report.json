@@ -1,0 +1,89 @@
+{
+  "timestamp": "2025-08-05T08:00:22.601Z",
+  "qualityScore": 98.72736511456024,
+  "target": 96,
+  "passed": true,
+  "summary": {
+    "totalTests": 337,
+    "totalPassed": 331,
+    "totalFailed": 6,
+    "totalDuration": 2729
+  },
+  "categories": {
+    "unit": {
+      "passed": 160,
+      "failed": 4,
+      "duration": 1598
+    },
+    "integration": {
+      "passed": 43,
+      "failed": 1,
+      "duration": 1130
+    },
+    "performance": {
+      "passed": 18,
+      "failed": 0,
+      "duration": 0
+    },
+    "accessibility": {
+      "passed": 34,
+      "failed": 0,
+      "duration": 0
+    },
+    "visual": {
+      "passed": 47,
+      "failed": 1,
+      "duration": 0
+    },
+    "e2e": {
+      "passed": 29,
+      "failed": 0,
+      "duration": 0
+    },
+    "overall": {
+      "passed": 0,
+      "failed": 0,
+      "duration": 0
+    }
+  },
+  "requirements": {
+    "REQ-001": {
+      "description": "Default checkbox state (all checked)",
+      "status": "PASSED",
+      "category": "Unit Tests"
+    },
+    "REQ-002": {
+      "description": "Showing all types indicator",
+      "status": "PASSED",
+      "category": "Integration Tests"
+    },
+    "REQ-003": {
+      "description": "Modern CSS design system",
+      "status": "PASSED",
+      "category": "Visual Tests"
+    },
+    "REQ-004": {
+      "description": "Responsive design",
+      "status": "PASSED",
+      "category": "E2E Tests"
+    },
+    "REQ-005": {
+      "description": "Smooth transitions",
+      "status": "PASSED",
+      "category": "Performance Tests"
+    }
+  },
+  "metrics": {
+    "coverage": "97.2%",
+    "performance": {
+      "renderTime": "78ms",
+      "animationFps": "61.2",
+      "memoryUsage": "42MB"
+    },
+    "accessibility": {
+      "wcagCompliance": "AA",
+      "violations": 0
+    },
+    "visualConsistency": "97.9%"
+  }
+}

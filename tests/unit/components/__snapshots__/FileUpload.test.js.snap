@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FileUpload.vue > responsive behavior > should adapt to mobile viewports 1`] = `
+"<div data-v-a1ed4b7d="" class="file-upload"><input data-v-a1ed4b7d="" type="file" accept=".jsonl,.json" class="file-input"><button data-v-a1ed4b7d="" class="upload-button"><span data-v-a1ed4b7d="" class="button-icon">📁</span><span data-v-a1ed4b7d="" class="button-text">Load Chat Log</span></button><!-- Drag and Drop Area -->
+  <!--v-if-->
+  <!-- File Info -->
+  <!--v-if-->
+</div>"
+`;
