@@ -79,4 +79,4 @@ coverage/
 
 # Claude Code session files
 *.jsonl
-.claude/sessions/
+.claude

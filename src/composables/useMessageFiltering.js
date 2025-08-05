@@ -2,6 +2,7 @@ import { ref, computed, reactive, watch } from 'vue'
 import { getMessageRole, getMessageToolNames } from '@/utils/messageTypes.js'
 import { FilteringEngine, filteringUtils } from '@/utils/FilteringEngine.js'
 import { messageContentCache } from '@/utils/MessageContentCache.js'
+import { logger } from '@/utils/logger.js'
 
 /**
  * Composable for filtering messages by role and tool type with performance optimizations
@@ -46,12 +47,24 @@ export function useMessageFiltering(messages) {
     if (debouncedSearchQuery.value && debouncedSearchQuery.value.trim()) {
       return false
     }
-    if (selectedRoles.size === 0 || selectedTools.size === 0) {
+    
+    // Check if no roles are selected when roles are available
+    if (availableRoles.value.length > 0 && selectedRoles.size === 0) {
       return false
     }
     
-    return selectedRoles.size === availableRoles.value.length &&
-           selectedTools.size === availableTools.value.length
+    // Check if no tools are selected when tools are available
+    if (availableTools.value.length > 0 && selectedTools.size === 0) {
+      return false
+    }
+    
+    // If roles are available, check if all are selected
+    const allRolesSelected = availableRoles.value.length === 0 || selectedRoles.size === availableRoles.value.length
+    
+    // If tools are available, check if all are selected
+    const allToolsSelected = availableTools.value.length === 0 || selectedTools.size === availableTools.value.length
+    
+    return allRolesSelected && allToolsSelected
   })
   
   /**
@@ -102,7 +115,7 @@ export function useMessageFiltering(messages) {
       return filteringEngine.processMessages(messages.value, filters)
       
     } catch (error) {
-      console.error('Error in filteringResults computed:', error)
+      logger.error('Error in filteringResults computed:', error)
       errors.value.push({
         operation: 'filteringResults',
         error: error.message,
@@ -131,17 +144,15 @@ export function useMessageFiltering(messages) {
    * Available filter options based on current messages
    */
   const availableRoles = computed(() => {
+    // 定义实际可能的Role类型，基于Claude日志的实际格式
+    const allPossibleRoles = ['user', 'assistant', 'tool', 'tool_result']
+    
     if (!messages.value || messages.value.length === 0) {
-      return []
+      return allPossibleRoles
     }
     
-    const roles = new Set()
-    messages.value.forEach(message => {
-      const role = getMessageRole(message)
-      roles.add(role)
-    })
-    
-    return Array.from(roles).sort()
+    // 始终返回所有可能的角色类型，确保用户可以看到完整的筛选选项
+    return allPossibleRoles
   })
   
   const availableTools = computed(() => {
@@ -333,7 +344,7 @@ export function useMessageFiltering(messages) {
       
       return filteredToOriginalIndexMap.value.get(filteredIndex) ?? -1
     } catch (error) {
-      console.error('Error in getOriginalIndex:', error)
+      logger.error('Error in getOriginalIndex:', error)
       errors.value.push({
         operation: 'getOriginalIndex',
         error: error.message,
@@ -364,7 +375,7 @@ export function useMessageFiltering(messages) {
       
       return originalToFilteredIndexMap.value.get(originalIndex) ?? -1
     } catch (error) {
-      console.error('Error in getFilteredIndex:', error)
+      logger.error('Error in getFilteredIndex:', error)
       errors.value.push({
         operation: 'getFilteredIndex',
         error: error.message,
@@ -444,11 +455,15 @@ export function useMessageFiltering(messages) {
     return filteringEngine.optimize()
   }
 
-  // Initialize with all roles and tools selected when available
+  // Initialize with all roles selected and tools selected when available
   watch([availableRoles, availableTools], ([newRoles, newTools]) => {
-    if (newRoles.length > 0 && selectedRoles.size === 0) {
-      newRoles.forEach(role => selectedRoles.add(role))
+    // 始终确保所有Role都被选中（无论是否有消息）
+    if (newRoles.length > 0) {
+      const missingRoles = newRoles.filter(role => !selectedRoles.has(role))
+      missingRoles.forEach(role => selectedRoles.add(role))
     }
+    
+    // 只有当工具存在于日志中时才选中它们
     if (newTools.length > 0 && selectedTools.size === 0) {
       newTools.forEach(tool => selectedTools.add(tool))
     }

@@ -1,8 +1,27 @@
 <template>
   <div class="log-viewer" @keydown="handleKeyboard">
     <header class="app-header">
-      <h1 class="app-title">Claude Log Viewer</h1>
-      <FileUpload @file-loaded="handleFileLoad" :loading="isLoading" />
+      <!-- Glassmorphism Header Backdrop -->
+      <div class="header-backdrop"></div>
+      
+      <!-- Brand Section -->
+      <div class="brand-section">
+        <div class="brand-logo">
+          <div class="logo-icon">
+            <MessageSquareIcon :size="20" class="text-primary-600 dark:text-primary-400" />
+          </div>
+          <div class="brand-text">
+            <h1 class="brand-title">Claude Log Viewer</h1>
+            <span class="brand-subtitle">Conversation Analysis Tool</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Action Section -->
+      <div class="action-section">
+        <FileUpload @file-loaded="handleFileLoad" :loading="isLoading" />
+        <ThemeToggle variant="simple" size="md" />
+      </div>
     </header>
     
     <main class="app-main">
@@ -24,6 +43,7 @@
         :filter-mode="filterMode"
         :are-all-roles-selected="areAllRolesSelected"
         :are-all-tools-selected="areAllToolsSelected"
+        :file-info="fileInfo"
         @message-selected="goToIndex"
         @role-filter-toggle="toggleRoleFilter"
         @tool-filter-toggle="toggleToolFilter"
@@ -62,6 +82,8 @@ import MessageIndex from './Sidebar/MessageIndex.vue'
 import MessageDisplay from './MainContent/MessageDisplay.vue'
 import FileUpload from './common/FileUpload.vue'
 import ErrorMessage from './common/ErrorMessage.vue'
+import ThemeToggle from './ui/ThemeToggle.vue'
+import { MessageSquareIcon } from 'lucide-vue-next'
 
 export default {
   name: 'LogViewer',
@@ -69,7 +91,9 @@ export default {
     MessageIndex,
     MessageDisplay,
     FileUpload,
-    ErrorMessage
+    ErrorMessage,
+    ThemeToggle,
+    MessageSquareIcon
   },
   setup() {
     // Initialize composables
@@ -139,6 +163,7 @@ export default {
       // Log parser state
       isLoading: logParser.isLoading,
       error: logParser.error,
+      fileInfo: logParser.fileInfo,
       
       // Enhanced filtering state
       filteredMessages: messageFiltering.filteredMessages,
@@ -188,53 +213,111 @@ export default {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-family);
+  overflow: hidden; /* 防止页面滚动 */
 }
 
 .app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-md) var(--spacing-xl);
-  background-color: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  height: var(--header-height);
-  flex-shrink: 0;
+  @apply relative z-20 flex items-center justify-between;
+  @apply px-4 py-2 lg:px-6;
+  @apply border-b border-gray-200/50 dark:border-gray-700/50;
+  @apply min-h-[48px];
+  @apply flex-shrink-0;
 }
 
-.app-title {
-  margin: 0;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+.header-backdrop {
+  @apply absolute inset-0 -z-10;
+  @apply bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 dark:border-gray-700/20;
+  @apply supports-[backdrop-filter]:bg-white/60;
+  @apply supports-[backdrop-filter]:dark:bg-gray-900/60;
+}
+
+.brand-section {
+  @apply flex items-center;
+}
+
+.brand-logo {
+  @apply flex items-center gap-2;
+}
+
+.logo-icon {
+  @apply flex items-center justify-center;
+  @apply w-8 h-8 rounded-lg;
+  @apply bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 dark:border-gray-700/20;
+  @apply transition-all duration-200;
+}
+
+.logo-icon:hover {
+  @apply scale-105 shadow-lg;
+}
+
+.brand-text {
+  @apply flex flex-col;
+}
+
+.brand-title {
+  @apply text-lg font-bold text-gray-900 dark:text-gray-100;
+  @apply leading-tight;
+  @apply font-semibold tracking-tight;
+}
+
+.brand-subtitle {
+  @apply text-xs text-gray-600 dark:text-gray-400;
+  @apply font-medium;
+}
+
+.action-section {
+  @apply flex items-center gap-3;
 }
 
 .app-main {
   display: flex;
   flex: 1;
   overflow: hidden;
+  min-height: 0; /* 确保flex子元素正确处理高度 */
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .app-header {
-    padding: var(--spacing-sm) var(--spacing-md);
+    @apply px-4 py-3;
   }
   
-  .app-title {
-    font-size: var(--font-size-lg);
+  .brand-title {
+    @apply text-lg;
+  }
+  
+  .brand-subtitle {
+    @apply text-xs;
+  }
+  
+  .logo-icon {
+    @apply w-10 h-10;
+  }
+  
+  .action-section {
+    @apply gap-2;
   }
 }
 
 @media (max-width: 480px) {
   .app-header {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    height: auto;
-    padding: var(--spacing-md);
+    @apply flex-col gap-3 px-4 py-4 min-h-0;
   }
   
-  .app-title {
-    font-size: var(--font-size-base);
+  .brand-section {
+    @apply self-start;
+  }
+  
+  .action-section {
+    @apply self-end;
+  }
+  
+  .brand-title {
+    @apply text-base;
+  }
+  
+  .brand-subtitle {
+    @apply hidden;
   }
 }
 </style>

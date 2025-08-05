@@ -1,0 +1,211 @@
+/**
+ * Performance-optimized CSS for better scroll performance
+ * Focus on reducing expensive backdrop-filter operations during scroll
+ */
+
+/* Performance-aware glassmorphism implementation */
+.glass-surface-optimized {
+  /* Use CSS variables for consistency */
+  will-change: var(--animation-will-change-scroll);
+  
+  /* Hardware acceleration */
+  transform: var(--animation-gpu-acceleration);
+  
+  /* Use standard blur from variables */
+  backdrop-filter: var(--scroll-performance-blur-standard);
+  
+  /* Use consolidated glass variables */
+  background: var(--glass-bg-light);
+  @media (prefers-color-scheme: dark) {
+    background: var(--glass-bg-dark);
+  }
+  
+  /* Reduce repaints */
+  contain: layout style paint;
+}
+
+/* Optimized glass effects for scrollable containers */
+.glass-scrollable {
+  /* Use reduced blur from variables */
+  backdrop-filter: var(--scroll-performance-blur-reduced);
+  
+  /* Use CSS containment to isolate rendering */
+  contain: layout style;
+  
+  /* Optimize for compositing layer */
+  transform: var(--animation-gpu-acceleration);
+}
+
+/* Performance-aware animations */
+.glass-hover-optimized {
+  transition: backdrop-filter 200ms ease-out, 
+              background-color 200ms ease-out;
+}
+
+.glass-hover-optimized:hover {
+  /* Only animate properties that don't trigger expensive reflows */
+  backdrop-filter: var(--scroll-performance-blur-enhanced);
+  background-color: var(--glass-bg-light);
+}
+
+/* Scroll performance optimizations */
+.scroll-optimized {
+  /* Use transform instead of changing position */
+  transform: var(--animation-gpu-acceleration);
+  
+  /* Prevent layout shifts */
+  contain: layout;
+  
+  /* Optimize paint operations */
+  will-change: var(--animation-will-change-scroll);
+}
+
+/* Reduce backdrop-filter on scroll for performance */
+@media (prefers-reduced-motion: no-preference) {
+  .glass-surface-scroll-aware {
+    backdrop-filter: blur(8px) saturate(140%);
+    transition: backdrop-filter 300ms ease-out;
+  }
+  
+  /* Reduce blur during scroll states */
+  .scrolling .glass-surface-scroll-aware {
+    backdrop-filter: blur(4px) saturate(120%);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .glass-surface-optimized {
+    /* Reduce blur on mobile for better performance */
+    backdrop-filter: blur(4px) saturate(120%);
+  }
+  
+  .glass-hover-optimized:hover {
+    /* Disable expensive hover effects on mobile */
+    backdrop-filter: blur(4px) saturate(120%);
+  }
+}
+
+/* Low-end device optimizations */
+@media (max-resolution: 1dppx) {
+  .glass-surface-optimized {
+    /* Minimal backdrop-filter for low-end devices */
+    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .glass-surface-optimized {
+      background-color: rgba(17, 24, 39, 0.9);
+    }
+  }
+}
+
+/* High refresh rate optimizations */
+@media (min-resolution: 2dppx) {
+  .glass-surface-optimized {
+    /* Enhanced effects for high-DPI displays */
+    backdrop-filter: blur(10px) saturate(150%);
+  }
+}
+
+/* Performance monitoring classes */
+.perf-monitor {
+  /* For debugging: highlight expensive elements */
+  outline: 1px solid red;
+  outline-offset: -1px;
+}
+
+/* Virtual scrolling optimizations */
+.virtual-scroll-container {
+  /* Optimize for transform-based scrolling */
+  transform: translateZ(0);
+  contain: layout style paint;
+  
+  /* Prevent unnecessary reflows */
+  position: relative;
+  overflow: hidden;
+}
+
+.virtual-scroll-item {
+  /* Optimize individual items */
+  will-change: transform;
+  contain: layout style;
+}
+
+/* CSS containment for performance */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-style {
+  contain: style;
+}
+
+.contain-strict {
+  contain: strict;
+}
+
+/* Optimized shadows without backdrop-filter */
+.shadow-glass-optimized {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  .shadow-glass-optimized {
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Efficient border implementations */
+.border-glass-optimized {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+}
+
+.border-glass-optimized::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Performance utilities */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.no-blur {
+  backdrop-filter: none !important;
+}
+
+.minimal-blur {
+  backdrop-filter: blur(2px) !important;
+}
+
+.standard-blur {
+  backdrop-filter: blur(8px) saturate(140%) !important;
+}
+
+.enhanced-blur {
+  backdrop-filter: blur(16px) saturate(160%) !important;
+}

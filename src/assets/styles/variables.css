@@ -1,16 +1,17 @@
+/* Enhanced theme system with automatic light/dark support */
 :root {
-  /* Colors - Dark Theme */
-  --bg-primary: #1a1b1e;
-  --bg-secondary: #25262b;
-  --bg-tertiary: #2c2e33;
-  --bg-hover: #373a40;
+  /* Light theme colors (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-hover: #e2e8f0;
   
-  --text-primary: #c1c2c5;
-  --text-secondary: #909296;
-  --text-muted: #5c5f66;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   
-  --border-color: #373a40;
-  --border-hover: #495057;
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
   
   --accent-color: #339af0;
   --accent-hover: #228be6;
@@ -84,6 +85,33 @@
   --filter-grid-gap-vertical: var(--spacing-sm);
   --filter-grid-breakpoint-small: 300px;
   --filter-grid-breakpoint-medium: 400px;
+  
+  /* Performance Variables */
+  --scroll-performance-blur-reduced: blur(4px) saturate(120%);
+  --scroll-performance-blur-standard: blur(8px) saturate(140%);
+  --scroll-performance-blur-enhanced: blur(12px) saturate(160%);
+  --scroll-performance-transition: backdrop-filter 200ms ease-out;
+  
+  /* Virtual Scrolling Variables */
+  --virtual-scroll-item-height: 100px;
+  --virtual-scroll-buffer: 10;
+  --virtual-scroll-threshold: 50;
+  --virtual-scroll-container-height: 400px;
+  
+  /* Glassmorphism Variables */
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-bg-dark: rgba(17, 24, 39, 0.1);
+  --glass-border-light: rgba(255, 255, 255, 0.2);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+  --glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --glass-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  /* Animation Performance Variables */
+  --animation-fps-60: 16ms;
+  --animation-fps-30: 33ms;
+  --animation-gpu-acceleration: translateZ(0);
+  --animation-will-change-scroll: transform, opacity;
+  --animation-will-change-glass: backdrop-filter, background-color;
 
   /* Z-Index */
   --z-dropdown: 1000;
@@ -93,4 +121,75 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
+
+  /* HSL Color Variables for Tailwind compatibility */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --muted: 210 40% 98%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 98%;
+  --accent-foreground: 222.2 84% 4.9%;
+}
+
+/* Dark theme colors */
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-hover: #475569;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --border-color: #475569;
+  --border-hover: #64748b;
+  
+  /* Enhanced shadows for dark mode */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.4);
+
+  /* Dark theme HSL variables */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+}
+
+/* Theme transition styles */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *:before,
+.theme-transitioning *:after {
+  transition: 
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-delay: 0ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transitioning,
+  .theme-transitioning *,
+  .theme-transitioning *:before,
+  .theme-transitioning *:after {
+    transition: none !important;
+  }
 }

@@ -22,12 +22,20 @@ export async function parseJsonl(jsonlContent) {
       const parsed = JSON.parse(line)
       
       // Enrich the message with computed properties
+      const role = getMessageRole(parsed)
+      const tools = getMessageToolNames(parsed)
+      
       const enrichedMessage = {
         ...parsed,
         _index: messages.length,
-        _role: getMessageRole(parsed),
-        _tools: getMessageToolNames(parsed),
+        _role: role,
+        _tools: tools,
         _timestamp: parsed.timestamp || null
+      }
+      
+      // Only log first few messages to reduce noise
+      if (messages.length < 5) {
+        console.log(`Message ${messages.length}: type=${parsed.type}, role=${role}, tools=${tools.join(',')}`)
       }
       
       messages.push(enrichedMessage)

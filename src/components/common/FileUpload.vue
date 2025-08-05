@@ -8,362 +8,458 @@
       class="file-input"
     />
     
-    <button
-      class="upload-button"
-      :class="{ loading }"
+    <!-- Modern Upload Button -->
+    <Button
+      variant="primary"
+      size="md"
+      :loading="loading"
       :disabled="loading"
       @click="triggerFileSelect"
+      class="upload-button"
     >
-      <LoadingSpinner v-if="loading" size="small" />
-      <span v-else class="button-icon">📁</span>
+      <template #icon>
+        <UploadIcon :size="16" v-if="!loading" />
+      </template>
       <span class="button-text">
         {{ loading ? 'Loading...' : 'Load Chat Log' }}
       </span>
-    </button>
+    </Button>
     
-    <!-- Drag and Drop Area -->
-    <div
-      class="drop-zone"
-      :class="{ active: isDragActive, error: dragError }"
-      @dragover.prevent="handleDragOver"
-      @dragleave.prevent="handleDragLeave"
-      @drop.prevent="handleDrop"
-      v-if="showDropZone"
+    <!-- Modern Drag and Drop Overlay -->
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-95"
     >
-      <div class="drop-content">
-        <div class="drop-icon">📎</div>
-        <p class="drop-text">
-          {{ dragError || 'Drop your .jsonl file here' }}
-        </p>
+      <div
+        v-if="showDropZone"
+        class="drop-zone"
+        :class="{ 
+          'drop-zone--active': isDragActive && !dragError,
+          'drop-zone--error': dragError 
+        }"
+        @dragover.prevent="handleDragOver"
+        @dragleave.prevent="handleDragLeave"
+        @drop.prevent="handleDrop"
+      >
+        <!-- Glassmorphism backdrop -->
+        <div class="drop-backdrop"></div>
+        
+        <!-- Drop content -->
+        <div class="drop-content">
+          <div class="drop-icon-container">
+            <div class="drop-icon-bg">
+              <FileTextIcon 
+                v-if="!dragError" 
+                :size="48" 
+                :class="[
+                  'drop-icon',
+                  { 'text-primary-500': isDragActive && !dragError }
+                ]"
+              />
+              <AlertCircleIcon 
+                v-else 
+                :size="48" 
+                class="drop-icon text-red-500"
+              />
+            </div>
+          </div>
+          
+          <div class="drop-text-container">
+            <h3 class="drop-title">
+              {{ dragError ? 'Invalid File' : 'Drop your chat log here' }}
+            </h3>
+            <p class="drop-description">
+              {{ dragError || 'Supports .jsonl and .json files up to 50MB' }}
+            </p>
+          </div>
+          
+          <!-- Progress bar for loading -->
+          <div v-if="uploadProgress > 0" class="upload-progress">
+            <div class="progress-bar">
+              <div 
+                class="progress-fill" 
+                :style="{ width: uploadProgress + '%' }"
+              ></div>
+            </div>
+            <span class="progress-text">{{ uploadProgress }}%</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </Transition>
     
-    <!-- File Info -->
-    <div class="file-info" v-if="lastLoadedFile">
-      <span class="file-name">{{ lastLoadedFile.name }}</span>
-      <span class="file-size">{{ formatFileSize(lastLoadedFile.size) }}</span>
-    </div>
   </div>
 </template>
 
-<script>
-import { ref, computed } from 'vue'
-import LoadingSpinner from './LoadingSpinner.vue'
+<script setup>
+import { ref, onUnmounted } from 'vue'
+import { Button, Card } from '@/components/ui'
+import { 
+  UploadIcon, 
+  FileTextIcon, 
+  AlertCircleIcon, 
+  XIcon 
+} from 'lucide-vue-next'
 
-export default {
-  name: 'FileUpload',
-  components: {
-    LoadingSpinner
-  },
-  props: {
-    loading: {
-      type: Boolean,
-      default: false
-    }
-  },
-  emits: ['file-loaded'],
-  setup(props, { emit }) {
-    const fileInput = ref(null)
-    const isDragActive = ref(false)
-    const dragError = ref('')
-    const lastLoadedFile = ref(null)
-    const showDropZone = ref(false)
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits(['file-loaded'])
+
+// Reactive state
+const fileInput = ref(null)
+const isDragActive = ref(false)
+const dragError = ref('')
+const lastLoadedFile = ref(null)
+const showDropZone = ref(false)
+const uploadProgress = ref(0)
+
+// Methods
+const triggerFileSelect = () => {
+  if (!props.loading && fileInput.value) {
+    fileInput.value.click()
+  }
+}
+
+const clearFile = () => {
+  lastLoadedFile.value = null
+  uploadProgress.value = 0
+  if (fileInput.value) {
+    fileInput.value.value = ''
+  }
+}
     
-    const triggerFileSelect = () => {
-      if (!props.loading && fileInput.value) {
-        fileInput.value.click()
+const handleFileSelect = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    processFile(file)
+  }
+}
+    
+const handleDragOver = (event) => {
+  event.preventDefault()
+  isDragActive.value = true
+  dragError.value = ''
+  
+  // Validate file type during drag
+  const items = event.dataTransfer.items
+  if (items && items.length > 0) {
+    const item = items[0]
+    if (item.kind === 'file') {
+      const file = item.getAsFile()
+      if (file && !isValidFileType(file)) {
+        dragError.value = 'Invalid file type. Please use .jsonl or .json files.'
       }
-    }
-    
-    const handleFileSelect = (event) => {
-      const file = event.target.files[0]
-      if (file) {
-        processFile(file)
-      }
-    }
-    
-    const handleDragOver = (event) => {
-      event.preventDefault()
-      isDragActive.value = true
-      dragError.value = ''
-      
-      // Validate file type during drag
-      const items = event.dataTransfer.items
-      if (items && items.length > 0) {
-        const item = items[0]
-        if (item.kind === 'file') {
-          const file = item.getAsFile()
-          if (file && !isValidFileType(file)) {
-            dragError.value = 'Invalid file type. Please use .jsonl or .json files.'
-          }
-        }
-      }
-    }
-    
-    const handleDragLeave = (event) => {
-      event.preventDefault()
-      if (!event.relatedTarget || !event.currentTarget.contains(event.relatedTarget)) {
-        isDragActive.value = false
-        dragError.value = ''
-      }
-    }
-    
-    const handleDrop = (event) => {
-      event.preventDefault()
-      isDragActive.value = false
-      dragError.value = ''
-      
-      const files = event.dataTransfer.files
-      if (files.length > 0) {
-        const file = files[0]
-        if (isValidFileType(file)) {
-          processFile(file)
-        } else {
-          dragError.value = 'Invalid file type. Please use .jsonl or .json files.'
-          setTimeout(() => {
-            dragError.value = ''
-          }, 3000)
-        }
-      }
-    }
-    
-    const isValidFileType = (file) => {
-      return file.name.endsWith('.jsonl') || file.name.endsWith('.json')
-    }
-    
-    const processFile = (file) => {
-      if (!isValidFileType(file)) {
-        alert('Please select a .jsonl or .json file.')
-        return
-      }
-      
-      // Check file size (limit to 50MB)
-      const maxSize = 50 * 1024 * 1024 // 50MB
-      if (file.size > maxSize) {
-        alert(`File too large. Maximum size is ${Math.round(maxSize / (1024 * 1024))}MB.`)
-        return
-      }
-      
-      lastLoadedFile.value = {
-        name: file.name,
-        size: file.size,
-        lastModified: file.lastModified
-      }
-      
-      emit('file-loaded', file)
-      
-      // Reset file input
-      if (fileInput.value) {
-        fileInput.value.value = ''
-      }
-    }
-    
-    const formatFileSize = (bytes) => {
-      if (bytes === 0) return '0 Bytes'
-      
-      const k = 1024
-      const sizes = ['Bytes', 'KB', 'MB', 'GB']
-      const i = Math.floor(Math.log(bytes) / Math.log(k))
-      
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-    }
-    
-    // Show drop zone on drag enter to window
-    const handleWindowDragEnter = (event) => {
-      if (event.dataTransfer.types.includes('Files')) {
-        showDropZone.value = true
-      }
-    }
-    
-    const handleWindowDragLeave = (event) => {
-      // Hide drop zone when leaving window
-      if (event.clientX === 0 && event.clientY === 0) {
-        showDropZone.value = false
-      }
-    }
-    
-    // Add window drag events
-    if (typeof window !== 'undefined') {
-      window.addEventListener('dragenter', handleWindowDragEnter)
-      window.addEventListener('dragleave', handleWindowDragLeave)
-    }
-    
-    return {
-      fileInput,
-      isDragActive,
-      dragError,
-      lastLoadedFile,
-      showDropZone,
-      triggerFileSelect,
-      handleFileSelect,
-      handleDragOver,
-      handleDragLeave,
-      handleDrop,
-      formatFileSize
     }
   }
 }
+
+const handleDragLeave = (event) => {
+  event.preventDefault()
+  if (!event.relatedTarget || !event.currentTarget.contains(event.relatedTarget)) {
+    isDragActive.value = false
+    dragError.value = ''
+  }
+}
+
+const handleDrop = (event) => {
+  event.preventDefault()
+  isDragActive.value = false
+  dragError.value = ''
+  
+  const files = event.dataTransfer.files
+  if (files.length > 0) {
+    const file = files[0]
+    if (isValidFileType(file)) {
+      processFile(file)
+    } else {
+      dragError.value = 'Invalid file type. Please use .jsonl or .json files.'
+      setTimeout(() => {
+        dragError.value = ''
+      }, 3000)
+    }
+  }
+}
+
+const isValidFileType = (file) => {
+  return file.name.endsWith('.jsonl') || file.name.endsWith('.json')
+}
+
+const processFile = (file) => {
+  if (!isValidFileType(file)) {
+    alert('Please select a .jsonl or .json file.')
+    return
+  }
+  
+  // Check file size (limit to 50MB)
+  const maxSize = 50 * 1024 * 1024 // 50MB
+  if (file.size > maxSize) {
+    alert(`File too large. Maximum size is ${Math.round(maxSize / (1024 * 1024))}MB.`)
+    return
+  }
+  
+  lastLoadedFile.value = {
+    name: file.name,
+    size: file.size,
+    lastModified: file.lastModified
+  }
+  
+  emit('file-loaded', file)
+  
+  // Reset file input
+  if (fileInput.value) {
+    fileInput.value.value = ''
+  }
+}
+    
+const formatFileSize = (bytes) => {
+  if (bytes === 0) return '0 Bytes'
+  
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+const formatDate = (timestamp) => {
+  const date = new Date(timestamp)
+  const now = new Date()
+  const diffInHours = (now - date) / (1000 * 60 * 60)
+  
+  if (diffInHours < 24) {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  } else if (diffInHours < 24 * 7) {
+    return date.toLocaleDateString([], { weekday: 'short' })
+  } else {
+    return date.toLocaleDateString([], { month: 'short', day: 'numeric' })
+  }
+}
+    
+// Show drop zone on drag enter to window
+const handleWindowDragEnter = (event) => {
+  if (event.dataTransfer.types.includes('Files')) {
+    showDropZone.value = true
+  }
+}
+
+const handleWindowDragLeave = (event) => {
+  // Hide drop zone when leaving window
+  if (event.clientX === 0 && event.clientY === 0) {
+    showDropZone.value = false
+  }
+}
+
+// Add window drag events with cleanup
+if (typeof window !== 'undefined') {
+  window.addEventListener('dragenter', handleWindowDragEnter)
+  window.addEventListener('dragleave', handleWindowDragLeave)
+}
+
+// Cleanup function to prevent memory leaks
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('dragenter', handleWindowDragEnter)
+    window.removeEventListener('dragleave', handleWindowDragLeave)
+  }
+})
 </script>
 
 <style scoped>
 .file-upload {
-  position: relative;
+  @apply relative;
 }
 
 .file-input {
-  display: none;
+  @apply sr-only;
 }
 
-.upload-button {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.upload-button:hover:not(:disabled) {
-  background-color: var(--accent-hover);
-  transform: translateY(-1px);
-}
-
-.upload-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.upload-button.loading {
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-}
-
-.button-icon {
-  font-size: var(--font-size-base);
-}
-
-.button-text {
-  white-space: nowrap;
-}
-
+/* Modern drag and drop overlay */
 .drop-zone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-  z-index: var(--z-modal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-normal);
+  @apply fixed inset-0 z-50;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-300 ease-out;
 }
 
-.drop-zone.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.drop-zone.error {
-  background-color: rgba(255, 107, 107, 0.1);
+.drop-backdrop {
+  @apply absolute inset-0;
+  @apply bg-black/20 dark:bg-black/40;
+  @apply backdrop-blur-md backdrop-saturate-150;
 }
 
 .drop-content {
-  text-align: center;
-  padding: var(--spacing-xl);
-  background-color: var(--bg-secondary);
-  border: 2px dashed var(--border-color);
-  border-radius: var(--border-radius-lg);
-  transition: all var(--transition-fast);
+  @apply relative z-10 mx-4;
+  @apply max-w-md w-full;
+  @apply text-center p-8;
+  /* Glass card styles */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  @apply border-2 border-dashed border-gray-300 dark:border-gray-600;
+  @apply transition-all duration-300 ease-out;
+  /* Scale-in animation */
+  animation: scaleIn 0.2s ease-out;
 }
 
-.drop-zone.active .drop-content {
-  border-color: var(--accent-color);
-  background-color: var(--bg-tertiary);
+@keyframes scaleIn {
+  0% { 
+    transform: scale(0.95); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
 }
 
-.drop-zone.error .drop-content {
-  border-color: var(--error-color);
-  background-color: rgba(255, 107, 107, 0.1);
+.drop-zone--active .drop-content {
+  @apply border-primary-500 bg-primary-50/90 dark:bg-primary-900/20;
+  @apply scale-105 shadow-2xl shadow-primary-500/25;
+}
+
+.drop-zone--error .drop-content {
+  @apply border-red-500 bg-red-50/90 dark:bg-red-900/20;
+  @apply shake;
+}
+
+.drop-icon-container {
+  @apply flex justify-center mb-6;
+}
+
+.drop-icon-bg {
+  @apply w-20 h-20 rounded-2xl;
+  @apply glass-surface;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-300;
+}
+
+.drop-zone--active .drop-icon-bg {
+  @apply bg-primary-100 dark:bg-primary-900/30;
+  @apply scale-110;
+}
+
+.drop-zone--error .drop-icon-bg {
+  @apply bg-red-100 dark:bg-red-900/30;
 }
 
 .drop-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-  opacity: 0.6;
+  @apply text-gray-500 dark:text-gray-400;
+  @apply transition-colors duration-300;
 }
 
-.drop-text {
-  margin: 0;
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-  font-weight: var(--font-weight-medium);
+.drop-text-container {
+  @apply space-y-2;
 }
 
-.drop-zone.error .drop-text {
-  color: var(--error-color);
+.drop-title {
+  @apply text-xl font-semibold text-gray-900 dark:text-gray-100;
+  @apply font-semibold tracking-tight;
 }
 
+.drop-zone--error .drop-title {
+  @apply text-red-600 dark:text-red-400;
+}
+
+.drop-description {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+  @apply font-medium;
+}
+
+.drop-zone--error .drop-description {
+  @apply text-red-600 dark:text-red-400;
+}
+
+/* Upload progress */
+.upload-progress {
+  @apply mt-6 space-y-2;
+}
+
+.progress-bar {
+  @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-primary-600 rounded-full;
+  @apply transition-all duration-300 ease-out;
+  @apply animate-pulse;
+}
+
+.progress-text {
+  @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+}
+
+/* Enhanced file info */
 .file-info {
-  display: flex;
-  flex-direction: column;
-  margin-top: var(--spacing-sm);
-  font-size: var(--font-size-xs);
-  color: var(--text-muted);
+  @apply mt-3;
+}
+
+.file-details {
+  @apply flex items-center gap-3;
+}
+
+.file-icon {
+  @apply flex-shrink-0;
+}
+
+.file-metadata {
+  @apply flex-1 min-w-0;
 }
 
 .file-name {
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
+  @apply text-sm font-medium text-gray-900 dark:text-gray-100;
+  @apply truncate;
 }
 
-.file-size {
-  margin-top: 2px;
+.file-stats {
+  @apply flex items-center gap-2 mt-1;
+  @apply text-xs text-gray-500 dark:text-gray-400;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .upload-button {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-xs);
-  }
-  
+.file-separator {
+  @apply text-gray-300 dark:text-gray-600;
+}
+
+/* Button text responsive behavior */
+@media (max-width: 640px) {
   .button-text {
-    display: none;
-  }
-  
-  .drop-content {
-    padding: var(--spacing-lg);
-    margin: var(--spacing-md);
-  }
-  
-  .drop-icon {
-    font-size: 2rem;
-  }
-  
-  .drop-text {
-    font-size: var(--font-size-base);
+    @apply hidden;
   }
 }
 
 @media (max-width: 480px) {
-  .upload-button {
-    padding: var(--spacing-xs);
+  .drop-content {
+    @apply mx-2 p-6;
   }
   
-  .button-icon {
-    font-size: var(--font-size-sm);
+  .drop-icon-bg {
+    @apply w-16 h-16;
   }
+  
+  .drop-title {
+    @apply text-lg;
+  }
+  
+  .drop-description {
+    @apply text-xs;
+  }
+}
+
+/* Animation keyframes */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
 }
 </style>
