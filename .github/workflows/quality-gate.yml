@@ -1,0 +1,146 @@
+name: Quality Gate
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Needed for sonar analysis
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run lint with report
+      run: |
+        npm run lint:check > lint-report.txt 2>&1 || echo "Lint issues found"
+        cat lint-report.txt
+    
+    - name: Run full test suite with coverage
+      run: npm run test:coverage
+    
+    - name: Check test coverage threshold
+      run: |
+        # Extract coverage percentage and check if it meets minimum threshold
+        COVERAGE=$(grep -o '"lines":{"total":[0-9]*,"covered":[0-9]*,"skipped":[0-9]*,"pct":[0-9.]*' coverage/coverage-summary.json | grep -o '"pct":[0-9.]*' | cut -d':' -f2)
+        echo "Coverage: $COVERAGE%"
+        if (( $(echo "$COVERAGE < 95.0" | bc -l) )); then
+          echo "❌ Coverage $COVERAGE% is below minimum threshold of 95%"
+          exit 1
+        else
+          echo "✅ Coverage $COVERAGE% meets threshold"
+        fi
+    
+    - name: Check bundle size
+      run: |
+        npm run build
+        BUNDLE_SIZE=$(du -sb dist/ | cut -f1)
+        MAX_SIZE=$((2 * 1024 * 1024))  # 2MB in bytes
+        
+        echo "Bundle size: $(numfmt --to=iec $BUNDLE_SIZE)"
+        if [ $BUNDLE_SIZE -gt $MAX_SIZE ]; then
+          echo "❌ Bundle size exceeds 2MB limit"
+          exit 1
+        else
+          echo "✅ Bundle size is acceptable"
+        fi
+    
+    - name: Performance benchmark
+      run: |
+        npm run test:benchmark > benchmark-results.txt 2>&1
+        cat benchmark-results.txt
+        
+        # Check if any performance tests failed
+        if grep -q "FAIL" benchmark-results.txt; then
+          echo "❌ Performance benchmarks failed"
+          exit 1
+        else
+          echo "✅ Performance benchmarks passed"
+        fi
+    
+    - name: Accessibility audit
+      run: |
+        npx playwright install --with-deps
+        npm run test:accessibility
+    
+    - name: Security audit
+      run: |
+        npm audit --audit-level high
+        # Check for high and critical vulnerabilities
+        AUDIT_RESULT=$(npm audit --audit-level high --json 2>/dev/null || echo '{"metadata":{"vulnerabilities":{"high":0,"critical":0}}}')
+        HIGH_VULNS=$(echo $AUDIT_RESULT | jq -r '.metadata.vulnerabilities.high // 0')
+        CRITICAL_VULNS=$(echo $AUDIT_RESULT | jq -r '.metadata.vulnerabilities.critical // 0')
+        
+        if [ "$HIGH_VULNS" -gt 0 ] || [ "$CRITICAL_VULNS" -gt 0 ]; then
+          echo "❌ High or critical security vulnerabilities found"
+          exit 1
+        else
+          echo "✅ No high or critical security vulnerabilities"
+        fi
+    
+    - name: Code quality metrics
+      run: |
+        # Generate complexity report
+        npx jscpd src/ --min-lines 10 --min-tokens 50 --format json > duplication-report.json || echo "No duplications found"
+        
+        # Check for code duplication
+        if [ -f duplication-report.json ] && [ -s duplication-report.json ]; then
+          DUPLICATIONS=$(jq -r '.statistics.total.duplications // 0' duplication-report.json)
+          if [ "$DUPLICATIONS" -gt 5 ]; then
+            echo "⚠️  Code duplication detected: $DUPLICATIONS instances"
+          else
+            echo "✅ Code duplication within acceptable limits"
+          fi
+        fi
+    
+    - name: Generate quality report
+      run: |
+        echo "# Quality Gate Report" > quality-report.md
+        echo "Generated on: $(date)" >> quality-report.md
+        echo "" >> quality-report.md
+        
+        echo "## Test Coverage" >> quality-report.md
+        echo '```' >> quality-report.md
+        grep -A 10 "Coverage summary" coverage/text-summary.txt >> quality-report.md || echo "No coverage summary available" >> quality-report.md
+        echo '```' >> quality-report.md
+        echo "" >> quality-report.md
+        
+        echo "## Bundle Size" >> quality-report.md
+        echo "- Total size: $(du -sh dist/ | cut -f1)" >> quality-report.md
+        echo "- Gzipped estimate: $(find dist/ -name "*.js" -exec gzip -c {} + | wc -c | numfmt --to=iec)" >> quality-report.md
+        echo "" >> quality-report.md
+        
+        echo "## Performance" >> quality-report.md
+        echo '```' >> quality-report.md
+        tail -20 benchmark-results.txt >> quality-report.md || echo "No benchmark results available" >> quality-report.md
+        echo '```' >> quality-report.md
+    
+    - name: Comment quality report on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          if (fs.existsSync('quality-report.md')) {
+            const report = fs.readFileSync('quality-report.md', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+          }
