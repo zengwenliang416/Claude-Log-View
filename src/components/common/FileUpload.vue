@@ -103,6 +103,9 @@ import {
   AlertCircleIcon, 
   XIcon 
 } from 'lucide-vue-next'
+import FileSecurityValidator from '@/utils/FileSecurityValidator.js'
+import { logger } from '@/utils/logger.js'
+import { configManager } from '@/utils/ConfigurationManager.js'
 
 const props = defineProps({
   loading: {
@@ -120,6 +123,15 @@ const dragError = ref('')
 const lastLoadedFile = ref(null)
 const showDropZone = ref(false)
 const uploadProgress = ref(0)
+
+// Initialize security validator with configuration
+const securityValidator = new FileSecurityValidator({
+  maxFileSize: configManager.get('MAX_FILE_SIZE', 50 * 1024 * 1024),
+  allowedExtensions: configManager.get('ALLOWED_FILE_TYPES', ['.jsonl', '.json']),
+  strictMode: configManager.get('STRICT_FILE_VALIDATION', configManager.isProduction()),
+  enableContentSanitization: configManager.get('SANITIZE_CONTENT', true),
+  timeoutMs: configManager.get('UPLOAD_TIMEOUT', 30000)
+})
 
 // Methods
 const triggerFileSelect = () => {
@@ -189,33 +201,99 @@ const handleDrop = (event) => {
 }
 
 const isValidFileType = (file) => {
-  return file.name.endsWith('.jsonl') || file.name.endsWith('.json')
+  const extension = securityValidator.getFileExtension(file.name)
+  return extension && securityValidator.allowedExtensions.has(extension.toLowerCase())
 }
 
-const processFile = (file) => {
-  if (!isValidFileType(file)) {
-    alert('Please select a .jsonl or .json file.')
-    return
-  }
+const processFile = async (file) => {
+  logger.debug('Processing file upload', {
+    component: 'FileUpload',
+    fileName: file.name,
+    fileSize: securityValidator.formatBytes(file.size),
+    mimeType: file.type
+  })
   
-  // Check file size (limit to 50MB)
-  const maxSize = 50 * 1024 * 1024 // 50MB
-  if (file.size > maxSize) {
-    alert(`File too large. Maximum size is ${Math.round(maxSize / (1024 * 1024))}MB.`)
-    return
-  }
-  
-  lastLoadedFile.value = {
-    name: file.name,
-    size: file.size,
-    lastModified: file.lastModified
-  }
-  
-  emit('file-loaded', file)
-  
-  // Reset file input
-  if (fileInput.value) {
-    fileInput.value.value = ''
+  try {
+    // Show upload progress
+    uploadProgress.value = 10
+    
+    // Comprehensive security validation
+    const validationResult = await securityValidator.validateFile(file)
+    uploadProgress.value = 50
+    
+    if (!validationResult.valid) {
+      const errorMessage = securityValidator.getUserFriendlyErrorMessage(validationResult)
+      logger.warn('File validation failed', {
+        component: 'FileUpload',
+        fileName: file.name,
+        validationSummary: securityValidator.getValidationSummary(validationResult)
+      })
+      
+      // Show user-friendly error
+      dragError.value = errorMessage
+      uploadProgress.value = 0
+      
+      // Clear error after 5 seconds
+      setTimeout(() => {
+        dragError.value = ''
+      }, 5000)
+      
+      return
+    }
+    
+    // Log warnings if present
+    if (validationResult.warnings && validationResult.warnings.length > 0) {
+      logger.warn('File validation warnings', {
+        component: 'FileUpload',
+        fileName: file.name,
+        warnings: validationResult.warnings.map(w => w.message)
+      })
+    }
+    
+    uploadProgress.value = 80
+    
+    // Store file metadata
+    lastLoadedFile.value = {
+      name: file.name,
+      size: file.size,
+      lastModified: file.lastModified,
+      validationSummary: securityValidator.getValidationSummary(validationResult)
+    }
+    
+    uploadProgress.value = 100
+    
+    logger.info('File validation successful', {
+      component: 'FileUpload',
+      fileName: file.name,
+      validationSummary: securityValidator.getValidationSummary(validationResult)
+    })
+    
+    // Emit validated file
+    emit('file-loaded', file)
+    
+    // Reset file input and progress
+    if (fileInput.value) {
+      fileInput.value.value = ''
+    }
+    
+    // Reset progress after a delay
+    setTimeout(() => {
+      uploadProgress.value = 0
+    }, 1000)
+    
+  } catch (error) {
+    logger.error('File processing failed', {
+      component: 'FileUpload',
+      fileName: file.name,
+      error
+    })
+    
+    dragError.value = 'File processing failed due to system error'
+    uploadProgress.value = 0
+    
+    setTimeout(() => {
+      dragError.value = ''
+    }, 5000)
   }
 }
     

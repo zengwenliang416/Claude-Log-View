@@ -8,7 +8,7 @@
       <div class="brand-section">
         <div class="brand-logo">
           <div class="logo-icon">
-            <MessageSquareIcon :size="20" class="text-primary-600 dark:text-primary-400" />
+            <img src="/logo-cyberpunk-icon.svg" alt="Claude Log Viewer" class="app-icon" />
           </div>
           <div class="brand-text">
             <h1 class="brand-title">Claude Log Viewer</h1>
@@ -241,13 +241,15 @@ export default {
 
 .logo-icon {
   @apply flex items-center justify-center;
-  @apply w-8 h-8 rounded-lg;
+  @apply w-12 h-12 rounded-xl;
   @apply bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl backdrop-saturate-150 border border-white/20 dark:border-gray-700/20;
   @apply transition-all duration-200;
+  @apply shadow-lg shadow-cyan-500/20;
 }
 
 .logo-icon:hover {
-  @apply scale-105 shadow-lg;
+  @apply scale-110 shadow-2xl shadow-cyan-500/40;
+  @apply border-cyan-400/30;
 }
 
 .brand-text {
@@ -263,6 +265,18 @@ export default {
 .brand-subtitle {
   @apply text-xs text-gray-600 dark:text-gray-400;
   @apply font-medium;
+}
+
+.app-icon {
+  @apply w-10 h-10;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.4));
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.app-icon:hover {
+  filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.3));
+  transform: scale(1.15) rotate(5deg);
 }
 
 .action-section {
@@ -291,7 +305,11 @@ export default {
   }
   
   .logo-icon {
-    @apply w-10 h-10;
+    @apply w-12 h-12;
+  }
+  
+  .app-icon {
+    @apply w-8 h-8;
   }
   
   .action-section {

@@ -1,4 +1,5 @@
 import { ref, computed, watch, readonly } from 'vue'
+import { logger } from '../utils/logger.js'
 
 /**
  * Composable for handling message navigation with enhanced error handling
@@ -179,7 +180,12 @@ export function useNavigation(messages) {
       // If current index is out of bounds, reset to last valid message
       if (currentIndex.value >= newMessages.length) {
         const newIndex = Math.max(0, newMessages.length - 1)
-        console.debug(`Index out of bounds, resetting from ${currentIndex.value} to ${newIndex}`)
+        logger.debug('Navigation index reset due to bounds violation', {
+          component: 'useNavigation',
+          previousIndex: currentIndex.value,
+          newIndex: newIndex,
+          totalMessages: messages.value?.length || 0
+        })
         currentIndex.value = newIndex
       }
       
@@ -267,7 +273,11 @@ export function useNavigation(messages) {
       
       // Validate current navigation state
       if (!validateNavigationState()) {
-        console.debug('Navigation state invalid before goToIndex, correcting...')
+        logger.debug('Navigation state corrected before goToIndex', {
+          component: 'useNavigation',
+          previousIndex: currentIndex.value,
+          messagesLength: messages.value?.length || 0
+        })
         correctNavigationState()
       }
       

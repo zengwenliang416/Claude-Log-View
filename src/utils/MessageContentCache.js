@@ -1,3 +1,5 @@
+import { logger } from './logger.js'
+
 /**
  * MessageContentCache - High-performance content caching system for search operations
  * 
@@ -231,7 +233,11 @@ export class MessageContentCache {
     
     if (this.enableMetrics) {
       const duration = performance.now() - startTime
-      console.debug(`Cache pre-warmed: ${processed} messages in ${duration.toFixed(2)}ms`)
+      logger.debug('Cache pre-warmed', {
+        component: 'MessageContentCache',
+        processedMessages: processed,
+        duration: `${duration.toFixed(2)}ms`
+      })
     }
   }
 
