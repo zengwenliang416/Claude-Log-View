@@ -1,0 +1,33 @@
+{
+  "name": "Claude Log Viewer - 高性能日志查看器",
+  "short_name": "Claude Log Viewer",
+  "description": "现代化 Vue 3 日志可视化工具，具有 70%+ 性能提升和炫酷的赛博朋克界面",
+  "theme_color": "#FF6B35",
+  "background_color": "#000020",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/logo-cyberpunk-icon.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/logo-simple.svg",
+      "sizes": "120x120",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/logo-square.svg",
+      "sizes": "200x200",
+      "type": "image/svg+xml"
+    }
+  ]
+}

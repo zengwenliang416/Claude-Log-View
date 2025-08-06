@@ -79,4 +79,9 @@ coverage/
 
 # Claude Code session files
 *.jsonl
-.claude
+
+# IDE and development files
+.idea/
+
+# Mac OS files  
+.DS_Store

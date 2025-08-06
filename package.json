@@ -1,7 +1,32 @@
 {
   "name": "claude-log-viewer",
+  "version": "1.0.0",
+  "description": "A sophisticated Vue 3 application for visualizing Claude Code conversation logs with advanced performance optimizations and comprehensive testing",
+  "keywords": [
+    "claude",
+    "log-viewer",
+    "vue3",
+    "conversation-logs",
+    "jsonl",
+    "performance",
+    "visualization",
+    "three.js",
+    "tailwindcss"
+  ],
+  "homepage": "https://github.com/wenliang-zeng/Claude-Log-View#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wenliang-zeng/Claude-Log-View.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wenliang-zeng/Claude-Log-View/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Claude Log Viewer Team",
+    "url": "https://github.com/wenliang-zeng/Claude-Log-View"
+  },
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -33,6 +58,10 @@
     "test:ui-suite": "node tests/run-ui-enhancement-tests.js",
     "test:benchmark": "vitest run tests/performance/scrolling-performance.test.js --reporter=verbose"
   },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "@types/three": "^0.179.0",
     "@vueuse/core": "^13.6.0",
@@ -59,6 +88,7 @@
     "playwright": "^1.44.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
+    "terser": "^5.43.1",
     "vite": "^5.3.4",
     "vitest": "^1.6.1"
   }
