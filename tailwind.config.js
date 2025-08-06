@@ -33,6 +33,17 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addComponents }) {
+      addComponents({
+        '.glass-surface': {
+          '@apply bg-white/80 dark:bg-gray-900/80': {},
+          '@apply backdrop-blur-md': {},
+          '@apply border border-white/20 dark:border-gray-700/50': {},
+          '@apply shadow-lg': {},
+        }
+      })
+    }
+  ],
 }
 
