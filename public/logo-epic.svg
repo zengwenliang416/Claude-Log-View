@@ -1,0 +1,237 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- HOLOGRAPHIC GRADIENTS -->
+    <linearGradient id="holoGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff006e">
+        <animate attributeName="stop-color" values="#ff006e;#8338ec;#3a86ff;#06ffa5;#ff006e" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="33%" style="stop-color:#8338ec">
+        <animate attributeName="stop-color" values="#8338ec;#3a86ff;#06ffa5;#ffbe0b;#8338ec" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="66%" style="stop-color:#3a86ff">
+        <animate attributeName="stop-color" values="#3a86ff;#06ffa5;#ffbe0b;#ff006e;#3a86ff" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#06ffa5">
+        <animate attributeName="stop-color" values="#06ffa5;#ffbe0b;#ff006e;#8338ec;#06ffa5" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="holoGradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff">
+        <animate attributeName="stop-color" values="#00f5ff;#ff00ff;#ffff00;#00ff00;#00f5ff" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#ff00ff">
+        <animate attributeName="stop-color" values="#ff00ff;#ffff00;#00ff00;#00f5ff;#ff00ff" dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#ffff00">
+        <animate attributeName="stop-color" values="#ffff00;#00ff00;#00f5ff;#ff00ff;#ffff00" dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- NEON GLOW EFFECTS -->
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="superGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="16" result="bigBlur"/>
+      <feGaussianBlur stdDeviation="24" result="hugeBlur"/>
+      <feMerge> 
+        <feMergeNode in="hugeBlur"/>
+        <feMergeNode in="bigBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 3D TRANSFORMS -->
+    <filter id="depthShadow">
+      <feOffset in="SourceGraphic" dx="0" dy="8" result="offset"/>
+      <feGaussianBlur in="offset" stdDeviation="12"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.3 0 0 0 0 0.8 0 0 0 0.4 0"/>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- ENERGY WAVE PATTERN -->
+    <radialGradient id="energyWave" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0">
+        <animate attributeName="stop-opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="30%" style="stop-color:#0080ff;stop-opacity:0">
+        <animate attributeName="stop-opacity" values="0;0.6;0" dur="2s" repeatCount="indefinite" begin="0.2s"/>
+      </stop>
+      <stop offset="60%" style="stop-color:#8000ff;stop-opacity:0">
+        <animate attributeName="stop-opacity" values="0;0.4;0" dur="2s" repeatCount="indefinite" begin="0.4s"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#ff0080;stop-opacity:0"/>
+    </radialGradient>
+
+    <!-- PRISM LIGHT REFRACTION -->
+    <linearGradient id="prismLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff0000;stop-opacity:0.6"/>
+      <stop offset="16%" style="stop-color:#ff8000;stop-opacity:0.6"/>
+      <stop offset="33%" style="stop-color:#ffff00;stop-opacity:0.6"/>
+      <stop offset="50%" style="stop-color:#00ff00;stop-opacity:0.6"/>
+      <stop offset="66%" style="stop-color:#0080ff;stop-opacity:0.6"/>
+      <stop offset="83%" style="stop-color:#8000ff;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ff0080;stop-opacity:0.6"/>
+      <animateTransform attributeName="gradientTransform" type="rotate" values="0 150 150;360 150 150" dur="8s" repeatCount="indefinite"/>
+    </linearGradient>
+
+    <!-- DATA MATRIX PATTERN -->
+    <pattern id="dataMatrix" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="none"/>
+      <text x="2" y="15" font-family="monospace" font-size="8" fill="#00ff41" opacity="0.3">01</text>
+      <animateTransform attributeName="patternTransform" type="translate" values="0,0;0,-20" dur="1s" repeatCount="indefinite"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND ENERGY FIELD -->
+  <circle cx="150" cy="150" r="140" fill="url(#energyWave)" opacity="0.8">
+    <animate attributeName="r" values="140;160;140" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- HOLOGRAPHIC MAIN SPHERE -->
+  <circle cx="150" cy="150" r="120" fill="url(#holoGradient1)" opacity="0.15" filter="url(#superGlow)">
+    <animate attributeName="opacity" values="0.15;0.25;0.15" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- DATA MATRIX BACKGROUND -->
+  <circle cx="150" cy="150" r="110" fill="url(#dataMatrix)" opacity="0.3"/>
+
+  <!-- 3D ISOMETRIC DOCUMENT CONTAINER -->
+  <g transform="translate(150, 150) skewX(-15) rotateX(15)">
+    
+    <!-- HOLOGRAPHIC GLASS CONTAINER -->
+    <rect x="-50" y="-60" width="100" height="100" rx="15" ry="15" 
+          fill="url(#holoGradient2)" opacity="0.3" filter="url(#neonGlow)"
+          stroke="url(#prismLight)" stroke-width="3">
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- 3D DEPTH LAYERS -->
+    <rect x="-45" y="-55" width="90" height="90" rx="12" ry="12" 
+          fill="none" stroke="url(#holoGradient1)" stroke-width="2" opacity="0.6" filter="url(#depthShadow)"/>
+    <rect x="-40" y="-50" width="80" height="80" rx="10" ry="10" 
+          fill="none" stroke="url(#holoGradient2)" stroke-width="1" opacity="0.8"/>
+
+    <!-- CENTRAL DOCUMENT WITH NEON EFFECT -->
+    <rect x="-30" y="-35" width="60" height="70" rx="8" ry="8" 
+          fill="url(#holoGradient1)" filter="url(#superGlow)" opacity="0.9">
+      <animate attributeName="fill" values="url(#holoGradient1);url(#holoGradient2);url(#holoGradient1)" dur="4s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- FUTURISTIC CORNER FOLD -->
+    <polygon points="22,-35 30,-35 30,-27" fill="url(#prismLight)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </polygon>
+    <line x1="22" y1="-35" x2="30" y2="-27" stroke="#00ffff" stroke-width="2" filter="url(#neonGlow)"/>
+
+    <!-- DYNAMIC LOG LINES WITH NEON GLOW -->
+    <g opacity="0.9">
+      <rect x="-22" y="-25" width="35" height="4" rx="2" fill="#00ffff" filter="url(#neonGlow)">
+        <animate attributeName="width" values="35;45;35" dur="3s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="-22" y="-15" width="40" height="4" rx="2" fill="#ff00ff" filter="url(#neonGlow)">
+        <animate attributeName="width" values="40;50;40" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+      </rect>
+      <rect x="-22" y="-5" width="30" height="4" rx="2" fill="#ffff00" filter="url(#neonGlow)">
+        <animate attributeName="width" values="30;40;30" dur="3s" repeatCount="indefinite" begin="1s"/>
+      </rect>
+      <rect x="-22" y="5" width="38" height="4" rx="2" fill="#00ff00" filter="url(#neonGlow)">
+        <animate attributeName="width" values="38;48;38" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+      </rect>
+      <rect x="-22" y="15" width="32" height="4" rx="2" fill="#ff8000" filter="url(#neonGlow)">
+        <animate attributeName="width" values="32;42;32" dur="3s" repeatCount="indefinite" begin="2s"/>
+      </rect>
+      <rect x="-22" y="25" width="36" height="4" rx="2" fill="#8000ff" filter="url(#neonGlow)">
+        <animate attributeName="width" values="36;46;36" dur="3s" repeatCount="indefinite" begin="2.5s"/>
+      </rect>
+    </g>
+
+  </g>
+
+  <!-- ORBITING PERFORMANCE PARTICLES -->
+  <g>
+    <!-- Particle 1 -->
+    <circle r="8" fill="#00ffff" filter="url(#superGlow)">
+      <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+        <path d="M150,20 Q280,150 150,280 Q20,150 150,20"/>
+      </animateMotion>
+      <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Particle 2 -->
+    <circle r="6" fill="#ff00ff" filter="url(#superGlow)">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
+        <path d="M280,150 Q150,280 20,150 Q150,20 280,150"/>
+      </animateMotion>
+      <animate attributeName="r" values="6;10;6" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Particle 3 -->
+    <circle r="10" fill="#ffff00" filter="url(#superGlow)">
+      <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
+        <path d="M150,280 Q20,150 150,20 Q280,150 150,280"/>
+      </animateMotion>
+      <animate attributeName="r" values="10;14;10" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Particle 4 -->
+    <circle r="7" fill="#00ff00" filter="url(#superGlow)">
+      <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+        <path d="M20,150 Q150,20 280,150 Q150,280 20,150"/>
+      </animateMotion>
+      <animate attributeName="r" values="7;11;7" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- ENERGY LIGHTNING BOLTS -->
+  <g opacity="0.7">
+    <path d="M50,50 L100,80 L80,120 L130,150 L100,190 L150,220" 
+          stroke="#00ffff" stroke-width="3" fill="none" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="0;1;0" dur="0.3s" repeatCount="indefinite" begin="0s"/>
+    </path>
+    <path d="M250,50 L200,80 L220,120 L170,150 L200,190 L150,220" 
+          stroke="#ff00ff" stroke-width="3" fill="none" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="0;1;0" dur="0.3s" repeatCount="indefinite" begin="2s"/>
+    </path>
+  </g>
+
+  <!-- HOLOGRAPHIC RING SYSTEM -->
+  <g opacity="0.6">
+    <circle cx="150" cy="150" r="130" fill="none" stroke="url(#holoGradient1)" stroke-width="2" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate" values="0 150 150;360 150 150" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="150" r="135" fill="none" stroke="url(#holoGradient2)" stroke-width="1" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate" values="360 150 150;0 150 150" dur="15s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- QUANTUM DATA STREAMS -->
+  <g opacity="0.4" stroke-width="2" fill="none" filter="url(#neonGlow)">
+    <path d="M0,150 Q75,50 150,150 Q225,250 300,150" stroke="#00ffff">
+      <animate attributeName="stroke-dasharray" values="0,1000;300,700;0,1000" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M150,0 Q250,75 150,150 Q50,225 150,300" stroke="#ff00ff">
+      <animate attributeName="stroke-dasharray" values="0,1000;300,700;0,1000" dur="4s" repeatCount="indefinite" begin="1s"/>
+    </path>
+  </g>
+
+  <!-- PERFORMANCE METRICS DISPLAY -->
+  <g transform="translate(150, 50)" opacity="0.8">
+    <text x="0" y="0" text-anchor="middle" font-family="monospace" font-size="12" fill="#00ffff" filter="url(#neonGlow)">
+      PERFORMANCE: 70%+ ⚡
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </text>
+  </g>
+
+</svg>

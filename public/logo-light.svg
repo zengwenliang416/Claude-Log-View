@@ -1,0 +1,130 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light theme variant optimized for light backgrounds -->
+  <defs>
+    <!-- Light glass-morphism gradient -->
+    <linearGradient id="lightGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.6);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Refined Claude gradient for light theme -->
+    <linearGradient id="lightClaudeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF8F00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFC107;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Light performance glow -->
+    <radialGradient id="lightPerformanceGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.3" />
+      <stop offset="70%" style="stop-color:#1976D2;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0D47A1;stop-opacity:0.1" />
+    </radialGradient>
+    
+    <!-- Light data flow gradient -->
+    <linearGradient id="lightDataFlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.8" />
+      <stop offset="33%" style="stop-color:#388E3C;stop-opacity:0.8" />
+      <stop offset="66%" style="stop-color:#2E7D32;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:0.8" />
+    </linearGradient>
+    
+    <!-- Light drop shadow -->
+    <filter id="lightShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="rgba(0,0,0,0.1)"/>
+    </filter>
+    
+    <!-- Light inner glow -->
+    <filter id="lightInnerGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with performance glow -->
+  <circle cx="100" cy="100" r="90" fill="url(#lightPerformanceGlow)" opacity="0.4"/>
+  
+  <!-- Main glass-morphism container -->
+  <circle cx="100" cy="100" r="85" fill="url(#lightGlassGradient)" 
+          stroke="rgba(255,255,255,0.7)" stroke-width="2" 
+          filter="url(#lightShadow)" opacity="0.85"/>
+  
+  <!-- Central log symbol - stylized document with data streams -->
+  <g transform="translate(100, 100)">
+    
+    <!-- Document base -->
+    <rect x="-25" y="-35" width="50" height="60" rx="6" ry="6" 
+          fill="url(#lightClaudeGradient)" filter="url(#lightInnerGlow)" opacity="0.9"/>
+    
+    <!-- Document corner fold -->
+    <polygon points="15,-35 25,-35 25,-25" fill="rgba(255,255,255,0.6)"/>
+    <line x1="15" y1="-35" x2="25" y2="-25" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+    
+    <!-- Log lines representing data streams -->
+    <g opacity="0.8">
+      <!-- Line 1 -->
+      <rect x="-18" y="-25" width="25" height="3" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+      <!-- Line 2 -->
+      <rect x="-18" y="-18" width="30" height="3" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+      <!-- Line 3 -->
+      <rect x="-18" y="-11" width="20" height="3" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+      <!-- Line 4 -->
+      <rect x="-18" y="-4" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.65)"/>
+      <!-- Line 5 -->
+      <rect x="-18" y="3" width="22" height="3" rx="1.5" fill="rgba(255,255,255,0.85)"/>
+      <!-- Line 6 -->
+      <rect x="-18" y="10" width="26" height="3" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+    </g>
+    
+    <!-- 3D depth indicator -->
+    <rect x="-23" y="-33" width="46" height="56" rx="6" ry="6" 
+          fill="none" stroke="url(#lightClaudeGradient)" stroke-width="2" opacity="0.4"/>
+    
+  </g>
+  
+  <!-- Performance indicators - more subtle for light theme -->
+  <g opacity="0.6">
+    <!-- Top performance indicator -->
+    <circle cx="100" cy="30" r="4" fill="#1976D2">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Right performance indicator -->
+    <circle cx="170" cy="100" r="4" fill="#388E3C">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+    </circle>
+    
+    <!-- Bottom performance indicator -->
+    <circle cx="100" cy="170" r="4" fill="#F57C00">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" begin="1.3s"/>
+    </circle>
+    
+    <!-- Left performance indicator -->
+    <circle cx="30" cy="100" r="4" fill="#C2185B">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+  </g>
+  
+  <!-- Data flow visualization - subtle for light theme -->
+  <g opacity="0.3" stroke="url(#lightDataFlow)" stroke-width="1" fill="none">
+    <path d="M 60 60 Q 80 80 100 70 Q 120 60 140 80 Q 160 100 140 120 Q 120 140 100 130 Q 80 120 60 140 Q 40 120 40 100 Q 40 80 60 60" 
+          stroke-dasharray="3,3">
+      <animate attributeName="stroke-dashoffset" values="0;20" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Subtle outer ring -->
+  <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1"/>
+  
+  <!-- Vue.js inspired accent - darker for light theme -->
+  <g transform="translate(100, 40)">
+    <circle cx="-8" cy="0" r="2" fill="#2E7D32"/>
+    <circle cx="0" cy="0" r="2" fill="#2E7D32"/>
+    <circle cx="8" cy="0" r="2" fill="#2E7D32"/>
+  </g>
+  
+</svg>

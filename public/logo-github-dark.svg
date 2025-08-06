@@ -1,0 +1,37 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark theme variant for GitHub -->
+  <defs>
+    <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8A65;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="darkShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#darkGradient)" filter="url(#darkShadow)"/>
+  
+  <!-- Document container -->
+  <rect x="35" y="25" width="50" height="70" rx="8" ry="8" 
+        fill="#1a1a1a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  
+  <!-- Corner fold -->
+  <polygon points="70,25 85,25 85,40" fill="rgba(255,255,255,0.15)"/>
+  <line x1="70" y1="25" x2="85" y2="40" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  
+  <!-- Log lines -->
+  <g opacity="0.9">
+    <rect x="42" y="40" width="28" height="3" rx="1.5" fill="#e1e4e8"/>
+    <rect x="42" y="50" width="32" height="3" rx="1.5" fill="#e1e4e8"/>
+    <rect x="42" y="60" width="24" height="3" rx="1.5" fill="#e1e4e8"/>
+    <rect x="42" y="70" width="30" height="3" rx="1.5" fill="#e1e4e8"/>
+    <rect x="42" y="80" width="26" height="3" rx="1.5" fill="#e1e4e8"/>
+  </g>
+  
+  <!-- Performance indicator -->
+  <circle cx="95" cy="25" r="4" fill="#58a6ff"/>
+  
+</svg>
