@@ -15,7 +15,8 @@
       "WebFetch(domain:css-tricks.com)",
       "Bash(npx tailwindcss init:*)",
       "Bash(grep:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npx vitest run:*)"
     ],
     "deny": []
   }

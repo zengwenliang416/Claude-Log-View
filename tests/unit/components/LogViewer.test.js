@@ -11,41 +11,96 @@ vi.mock('@/composables/useLogParser.js', () => ({
     messages: { value: [] },
     isLoading: { value: false },
     error: { value: null },
+    fileInfo: { value: null },
     loadFile: vi.fn()
   })
 }))
 
+const mockFilteringResult = {
+  filteredMessages: { value: createFilterTestData() },
+  availableRoles: { value: ['user', 'assistant', 'tool', 'tool_result', 'summary'] },
+  availableTools: { value: ['Bash', 'Read', 'Edit'] },
+  selectedRoles: { value: new Set() },
+  selectedTools: { value: new Set() },
+  searchQuery: { value: '' },
+  isShowingAll: { value: true },
+  filterMode: { value: 'include' },
+  areAllRolesSelected: { value: true },
+  areAllToolsSelected: { value: true },
+  toggleRoleFilter: vi.fn(),
+  toggleToolFilter: vi.fn(),
+  clearAllFilters: vi.fn(),
+  selectAllRoles: vi.fn(),
+  selectAllTools: vi.fn(),
+  getRoleMessageCount: vi.fn(() => 5),
+  getToolMessageCount: vi.fn(() => 3)
+}
+
 vi.mock('@/composables/useMessageFiltering.js', () => ({
-  useMessageFiltering: () => ({
-    filteredMessages: { value: createFilterTestData() },
-    availableRoles: { value: ['user', 'assistant', 'tool', 'tool_result', 'summary'] },
-    availableTools: { value: ['Bash', 'Read', 'Edit'] },
-    roleFilters: new Set(),
-    toolFilters: new Set(),
-    searchQuery: { value: '' },
-    toggleRoleFilter: vi.fn(),
-    toggleToolFilter: vi.fn(),
-    clearAllFilters: vi.fn(),
-    getRoleMessageCount: vi.fn(() => 5),
-    getToolMessageCount: vi.fn(() => 3)
-  })
+  useMessageFiltering: vi.fn(() => mockFilteringResult)
 }))
 
+const mockNavigationResult = {
+  currentIndex: { value: 0 },
+  currentMessage: { value: null },
+  totalMessages: { value: 8 },
+  canGoPrevious: { value: false },
+  canGoNext: { value: true },
+  navigationInfo: { 
+    value: { current: 1, total: 8, position: '1 / 8' } 
+  },
+  goToIndex: vi.fn(),
+  goToPrevious: vi.fn(),
+  goToNext: vi.fn(),
+  goToFirst: vi.fn(),
+  handleKeyboardNavigation: vi.fn()
+}
+
 vi.mock('@/composables/useNavigation.js', () => ({
-  useNavigation: () => ({
-    currentIndex: { value: 0 },
-    currentMessage: { value: null },
-    totalMessages: { value: 8 },
-    canGoPrevious: { value: false },
-    canGoNext: { value: true },
-    navigationInfo: { 
-      value: { current: 1, total: 8, position: '1 / 8' } 
-    },
-    goToIndex: vi.fn(),
-    goToPrevious: vi.fn(),
-    goToNext: vi.fn(),
-    handleKeyboardNavigation: vi.fn()
-  })
+  useNavigation: vi.fn(() => mockNavigationResult)
+}))
+
+// Mock child components
+vi.mock('@/components/Sidebar/MessageIndex.vue', () => ({
+  default: {
+    name: 'MessageIndex',
+    template: '<div data-testid="message-index">MessageIndex Mock</div>'
+  }
+}))
+
+vi.mock('@/components/MainContent/MessageDisplay.vue', () => ({
+  default: {
+    name: 'MessageDisplay',
+    template: '<div data-testid="message-display">MessageDisplay Mock</div>'
+  }
+}))
+
+vi.mock('@/components/common/FileUpload.vue', () => ({
+  default: {
+    name: 'FileUpload',
+    template: '<div data-testid="file-upload">FileUpload Mock</div>'
+  }
+}))
+
+vi.mock('@/components/common/ErrorMessage.vue', () => ({
+  default: {
+    name: 'ErrorMessage',
+    template: '<div data-testid="error-message">ErrorMessage Mock</div>'
+  }
+}))
+
+vi.mock('@/components/ui/ThemeToggle.vue', () => ({
+  default: {
+    name: 'ThemeToggle',
+    template: '<div data-testid="theme-toggle">ThemeToggle Mock</div>'
+  }
+}))
+
+vi.mock('lucide-vue-next', () => ({
+  MessageSquareIcon: {
+    name: 'MessageSquareIcon',
+    template: '<svg data-testid="message-square-icon"></svg>'
+  }
 }))
 
 describe('LogViewer.vue', () => {

@@ -30,8 +30,8 @@ jobs:
     - name: Run linting
       run: npm run lint:check
     
-    - name: Run unit tests (allow failures for now)
-      run: npm run test:unit || echo "Unit tests have known failures - need refactoring"
+    - name: Run critical unit tests
+      run: npm run test:critical
     
     - name: Run integration tests (allow failures for now)
       run: npm run test:integration || echo "Integration tests have known failures - need refactoring"
