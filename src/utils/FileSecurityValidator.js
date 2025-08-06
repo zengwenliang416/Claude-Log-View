@@ -150,7 +150,7 @@ export class FileSecurityValidator {
         severity: 'critical',
         message: 'No file provided for validation'
       })
-      return { valid: false, errors }
+      return this.createValidationResult(false, errors)
     }
     
     if (!file.name || file.name.trim() === '') {
@@ -180,7 +180,7 @@ export class FileSecurityValidator {
       }
     }
     
-    return { valid: errors.length === 0, errors }
+    return this.createValidationResult(errors.length === 0, errors)
   }
 
   /**
@@ -198,7 +198,7 @@ export class FileSecurityValidator {
         severity: 'high',
         message: 'File must have a file extension'
       })
-      return { valid: false, errors }
+      return this.createValidationResult(false, errors)
     }
     
     if (!this.allowedExtensions.has(extension.toLowerCase())) {
@@ -213,7 +213,7 @@ export class FileSecurityValidator {
       })
     }
     
-    return { valid: errors.length === 0, errors }
+    return this.createValidationResult(errors.length === 0, errors)
   }
 
   /**
@@ -230,10 +230,10 @@ export class FileSecurityValidator {
       // Warn but don't fail validation if extension is valid
       const extension = this.getFileExtension(filename)
       if (this.allowedExtensions.has(extension?.toLowerCase())) {
-        return { valid: true, errors: [], warnings: [{
+        return this.createValidationResult(true, [], [{
           type: 'EMPTY_MIME_TYPE',
           message: 'MIME type not provided, relying on file extension validation'
-        }] }
+        }])
       }
     }
     
@@ -249,7 +249,7 @@ export class FileSecurityValidator {
       })
     }
     
-    return { valid: errors.length === 0, errors }
+    return this.createValidationResult(errors.length === 0, errors)
   }
 
   /**
@@ -282,7 +282,7 @@ export class FileSecurityValidator {
       })
     }
     
-    return { valid: errors.length === 0, errors }
+    return this.createValidationResult(errors.length === 0, errors)
   }
 
   /**
@@ -357,7 +357,7 @@ export class FileSecurityValidator {
         severity: 'high',
         message: 'File is empty or contains only whitespace'
       })
-      return { valid: false, errors }
+      return this.createValidationResult(false, errors)
     }
     
     const lines = content.trim().split('\n')
@@ -386,6 +386,7 @@ export class FileSecurityValidator {
       
       try {
         const parsed = JSON.parse(line)
+        validJsonLines++  // Count as valid JSON regardless of structure
         
         // Validate message structure
         if (this.enableStructureValidation && !this.isValidMessageStructure(parsed)) {
@@ -393,8 +394,6 @@ export class FileSecurityValidator {
             type: 'INVALID_MESSAGE_STRUCTURE',
             message: `Line ${i + 1} does not match expected message structure`
           })
-        } else {
-          validJsonLines++
         }
         
         // Check for potentially dangerous content
@@ -428,7 +427,7 @@ export class FileSecurityValidator {
       })
     }
     
-    return { valid: errors.length === 0, errors, warnings }
+    return this.createValidationResult(errors.length === 0, errors, warnings)
   }
 
   /**

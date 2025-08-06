@@ -223,9 +223,19 @@ const processFile = async (file) => {
     
     if (!validationResult.valid) {
       const errorMessage = securityValidator.getUserFriendlyErrorMessage(validationResult)
+      
+      // Debug logging to console
+      console.log('=== FILE VALIDATION FAILED ===')
+      console.log('Error Message:', errorMessage)
+      console.log('Validation Result:', validationResult)
+      console.log('Validation Errors:', validationResult.errors)
+      console.log('==============================')
+      
       logger.warn('File validation failed', {
         component: 'FileUpload',
         fileName: file.name,
+        errorMessage,
+        errors: validationResult.errors,
         validationSummary: securityValidator.getValidationSummary(validationResult)
       })
       
