@@ -130,6 +130,9 @@ npm run preview
 
 ## 🏗️ Architecture
 
+<details>
+<summary><strong>📋 Component Hierarchy & Core Systems</strong></summary>
+
 ### Component Hierarchy
 
 ```mermaid
@@ -233,6 +236,8 @@ src/
         └── performance-optimizations.css # Performance CSS
 ```
 
+</details>
+
 ---
 
 ## 📊 Performance
@@ -245,6 +250,9 @@ src/
 | **Initial Load Time** | ~1.8 s | ~0.9 s | **50% faster** |
 | **Memory Usage** | ~45 MB | ~28 MB | **38% reduction** |
 | **Bundle Size** | ~1.8 MB | ~1.2 MB | **33% smaller** |
+
+<details>
+<summary><strong>⚡ Core Optimizations & Implementation Details</strong></summary>
 
 ### ⚡ **Core Optimizations**
 
@@ -287,6 +295,8 @@ const results = filteringEngine.processMessages(messages, filters)
 {"uuid": "msg-4", "role": "tool_result", "tool_name": "Edit", "content": "✅ Component optimized successfully", "timestamp": "2024-08-06T10:00:45.000Z"}
 ```
 
+</details>
+
 ---
 
 ## 🧪 Testing
@@ -306,6 +316,9 @@ npm run test:e2e           # End-to-end tests
 npm run test:performance   # Performance benchmarks
 npm run test:accessibility # Web Content Accessibility Guidelines compliance tests
 ```
+
+<details>
+<summary><strong>🎯 Test Coverage & Advanced Features</strong></summary>
 
 ### 🎯 **Test Coverage Breakdown**
 
@@ -344,6 +357,8 @@ describe('Filtering Integration', () => {
 })
 ```
 
+</details>
+
 ---
 
 ## 💻 Development
@@ -356,13 +371,10 @@ npm install
 
 # Start development server with hot reload
 npm run dev
-
-# Run development with testing watch mode
-npm run dev & npm run test:watch
-
-# Build and analyze bundle
-npm run build && npm run preview
 ```
+
+<details>
+<summary><strong>📋 Available Scripts & Development Tools</strong></summary>
 
 ### 📋 **Available Scripts**
 
@@ -414,9 +426,14 @@ export default {
 }
 ```
 
+</details>
+
 ---
 
 ## 📚 API Reference
+
+<details>
+<summary><strong>🔧 Core Composables & Utility Classes</strong></summary>
 
 ### 🔧 **Core Composables**
 
@@ -540,6 +557,8 @@ interface FilteringResult {
   stats: ProcessingStats
 }
 ```
+
+</details>
 
 ---
 
