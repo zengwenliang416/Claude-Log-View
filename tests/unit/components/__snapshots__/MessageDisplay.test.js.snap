@@ -1,0 +1,281 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MessageDisplay.vue > Responsive Design > should adapt to mobile viewports 1`] = `
+"<main data-v-eba6b37b="" class="message-display">
+  <div data-v-eba6b37b="" class="messages-container">
+    <div data-v-eba6b37b="" class="message-item message-active message-user">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">USER</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-user">USER</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">1</span></div>
+          </div>
+          <!--v-if-->
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- User/Assistant Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Assistant Response</h3>
+            <div data-v-51ef8b4e="" class="message-parts">
+              <div data-v-51ef8b4e="" class="message-part text">
+                <!-- Text Content (Plain Text) -->
+                <div data-v-51ef8b4e="" class="text-content"><pre data-v-51ef8b4e="" class="text-block">Hello world</pre>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-assistant">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">ASSISTANT</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-assistant">ASSISTANT</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">2</span></div>
+          </div>
+          <!--v-if-->
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- User/Assistant Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Assistant Response</h3>
+            <div data-v-51ef8b4e="" class="message-parts">
+              <div data-v-51ef8b4e="" class="message-part text">
+                <!-- Text Content (Plain Text) -->
+                <div data-v-51ef8b4e="" class="text-content"><pre data-v-51ef8b4e="" class="text-block">Hi there, how can I help?</pre>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-tool">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">TOOL (Bash)</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-tool">TOOL (Bash)</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">3</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-tools"><span data-v-bae21dd0="" class="tools-label">Tools:</span>
+            <div data-v-bae21dd0="" class="tool-badges"><span data-v-bae21dd0="" class="tool-badge">Bash</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- User/Assistant Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Assistant Response</h3>
+            <div data-v-51ef8b4e="" class="message-parts">
+              <div data-v-51ef8b4e="" class="message-part text">
+                <!-- Text Content (Plain Text) -->
+                <div data-v-51ef8b4e="" class="text-content"><pre data-v-51ef8b4e="" class="text-block">Using Bash tool</pre>
+                </div>
+              </div>
+              <div data-v-51ef8b4e="" class="message-part tool_use">
+                <!-- Text Content (Plain Text) -->
+                <!-- Tool Use -->
+                <div data-v-51ef8b4e="" class="tool-use-content">
+                  <div data-v-51ef8b4e="" class="tool-header"><span data-v-51ef8b4e="" class="tool-name">Bash</span><span data-v-51ef8b4e="" class="tool-id"></span></div>
+                  <div data-v-51ef8b4e="" class="tool-parameters">
+                    <h4 data-v-51ef8b4e="" class="parameters-title">Parameters:</h4><pre data-v-51ef8b4e="" class="code-block"><span class="hljs">[object Object]</span></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-tool-result">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">TOOL RESULT</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-tool-result">TOOL RESULT</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">4</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-tools"><span data-v-bae21dd0="" class="tools-label">Tools:</span>
+            <div data-v-bae21dd0="" class="tool-badges"><span data-v-bae21dd0="" class="tool-badge">Bash</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- Tool Result Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Tool Result</h3>
+            <div data-v-51ef8b4e="" class="tool-result-content">
+              <div data-v-51ef8b4e="" class="result-header"><span data-v-51ef8b4e="" class="result-type"> Type: Bash</span></div>
+              <div data-v-51ef8b4e="" class="result-content">
+                <h4 data-v-51ef8b4e="" class="result-title">Output:</h4>
+                <div data-v-51ef8b4e="" class="result-data"><pre data-v-51ef8b4e="" class="text-block">file1.txt
+file2.txt</pre>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-tool">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">TOOL (Read)</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-tool">TOOL (Read)</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">5</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-tools"><span data-v-bae21dd0="" class="tools-label">Tools:</span>
+            <div data-v-bae21dd0="" class="tool-badges"><span data-v-bae21dd0="" class="tool-badge">Read</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- User/Assistant Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Assistant Response</h3>
+            <div data-v-51ef8b4e="" class="message-parts">
+              <div data-v-51ef8b4e="" class="message-part text">
+                <!-- Text Content (Plain Text) -->
+                <div data-v-51ef8b4e="" class="text-content"><pre data-v-51ef8b4e="" class="text-block">Using Read tool</pre>
+                </div>
+              </div>
+              <div data-v-51ef8b4e="" class="message-part tool_use">
+                <!-- Text Content (Plain Text) -->
+                <!-- Tool Use -->
+                <div data-v-51ef8b4e="" class="tool-use-content">
+                  <div data-v-51ef8b4e="" class="tool-header"><span data-v-51ef8b4e="" class="tool-name">Read</span><span data-v-51ef8b4e="" class="tool-id"></span></div>
+                  <div data-v-51ef8b4e="" class="tool-parameters">
+                    <h4 data-v-51ef8b4e="" class="parameters-title">Parameters:</h4><pre data-v-51ef8b4e="" class="code-block"><span class="hljs">[object Object]</span></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-tool-result">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">TOOL RESULT</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-tool-result">TOOL RESULT</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">6</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-tools"><span data-v-bae21dd0="" class="tools-label">Tools:</span>
+            <div data-v-bae21dd0="" class="tool-badges"><span data-v-bae21dd0="" class="tool-badge">Read</span></div>
+          </div>
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- Tool Result Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Tool Result</h3>
+            <div data-v-51ef8b4e="" class="tool-result-content">
+              <div data-v-51ef8b4e="" class="result-header"><span data-v-51ef8b4e="" class="result-type"> Type: Read</span></div>
+              <div data-v-51ef8b4e="" class="result-content">
+                <h4 data-v-51ef8b4e="" class="result-title">Output:</h4>
+                <div data-v-51ef8b4e="" class="result-data"><pre data-v-51ef8b4e="" class="text-block">File content here</pre>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-user">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">USER</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-user">USER</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">7</span></div>
+          </div>
+          <!--v-if-->
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <!-- User/Assistant Messages -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Assistant Response</h3>
+            <div data-v-51ef8b4e="" class="message-parts">
+              <div data-v-51ef8b4e="" class="message-part text">
+                <!-- Text Content (Plain Text) -->
+                <div data-v-51ef8b4e="" class="text-content"><pre data-v-51ef8b4e="" class="text-block">Thank you for the help</pre>
+                </div>
+              </div>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+    <div data-v-eba6b37b="" class="message-item message-summary">
+      <!-- Message Type Indicator -->
+      <div data-v-eba6b37b="" class="message-type-indicator"><span data-v-eba6b37b="" class="type-label">SUMMARY</span></div><!-- Message Content -->
+      <div data-v-eba6b37b="" class="message-wrapper">
+        <header data-v-bae21dd0="" data-v-eba6b37b="" class="message-header">
+          <div data-v-bae21dd0="" class="header-main">
+            <div data-v-bae21dd0="" class="message-type-badge message-summary">SUMMARY</div>
+            <div data-v-bae21dd0="" class="message-meta"><span data-v-bae21dd0="" class="message-timestamp">2025/8/6 14:58:25</span><span data-v-bae21dd0="" class="message-uuid">8</span></div>
+          </div>
+          <!--v-if-->
+          <div data-v-bae21dd0="" class="header-actions"><button data-v-bae21dd0="" class="toggle-extra"> Show Details </button></div>
+        </header>
+        <div data-v-51ef8b4e="" data-v-eba6b37b="" class="message-content">
+          <!-- Summary Message -->
+          <div data-v-51ef8b4e="" class="content-section">
+            <h3 data-v-51ef8b4e="" class="section-title">Summary</h3>
+            <div data-v-51ef8b4e="" class="summary-content"><pre data-v-51ef8b4e="" class="text-block">Task completed successfully</pre>
+            </div>
+          </div><!-- Metadata Section -->
+          <!--v-if-->
+          <!-- Actions -->
+          <div data-v-51ef8b4e="" class="content-actions"><button data-v-51ef8b4e="" class="action-button">Show Raw Data </button><button data-v-51ef8b4e="" class="action-button"> Copy Message </button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>"
+`;
