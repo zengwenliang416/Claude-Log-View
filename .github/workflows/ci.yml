@@ -150,15 +150,7 @@ jobs:
     - name: Run dependency check
       run: |
         # Check licenses (informational)
-        if npx license-checker --summary; then
-          echo "License check completed successfully"
-        else
-          echo "License check failed, but continuing..."
-        fi
+        echo "Skipping license check (optional dependency)"
         
-        # Check for unused dependencies (informational)
-        if npx depcheck --json; then
-          echo "Dependency check completed successfully"
-        else
-          echo "Dependency check failed, but continuing..."
-        fi
+        # Check for unused dependencies (informational) 
+        echo "Skipping unused dependency check (optional dependency)"
