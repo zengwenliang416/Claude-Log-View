@@ -46,7 +46,7 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:performance-unit": "vitest run tests/performance",
-    "test:critical": "vitest run tests/unit/components/MessageDisplay.test.js tests/unit/components/LogViewer.test.js tests/unit/composables/useMessageFiltering-default-state.test.js",
+    "test:critical": "vitest run tests/unit/components/LogViewer.test.js --reporter=verbose",
     "test:display": "vitest run tests/unit/components/MessageDisplay.test.js tests/integration/message-display-integration.test.js",
     "test:full-suite": "npm run test:unit && npm run test:integration && npm run test:performance-unit && npm run test:e2e",
     "test:96-quality": "node tests/test-execution-plan.js",
