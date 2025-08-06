@@ -13,7 +13,9 @@
       "Bash(npm run test:run:*)",
       "Bash(node:*)",
       "WebFetch(domain:css-tricks.com)",
-      "Bash(npx tailwindcss init:*)"
+      "Bash(npx tailwindcss init:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
