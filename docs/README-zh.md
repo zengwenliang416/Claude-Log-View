@@ -19,9 +19,15 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-ESM-3178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.17-38B2AC.svg?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.179-000000.svg?style=flat&logo=three.js)](https://threejs.org/)
+
 [![许可证](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/ci.yml/badge.svg)](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/ci.yml)
+[![质量门控](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/quality-gate.yml)
 [![质量得分](https://img.shields.io/badge/Quality%20Score-98.7%25-brightgreen.svg)](tests/TESTING_SUMMARY.md)
 [![性能](https://img.shields.io/badge/Performance-70%25%20Faster-orange.svg)](PERFORMANCE_IMPROVEMENTS.md)
+[![安全](https://img.shields.io/badge/Security-Hardened-blue.svg)](SECURITY.md)
+[![欢迎贡献](https://img.shields.io/badge/Contributing-Welcome-ff69b4.svg)](CONTRIBUTING.md)
+[![行为准则](https://img.shields.io/badge/Code%20of%20Conduct-Contributor%20Covenant-green.svg)](CODE_OF_CONDUCT.md)
 
 ---
 
@@ -59,6 +65,9 @@ Claude 日志查看器是一个**前沿的 Vue 3 Web 应用程序**，专为解�
 - [💻 开发](#-开发)
 - [📚 API 参考](#-api-参考)
 - [🤝 贡献指南](#-贡献指南)
+- [🛡️ 安全政策](#-安全政策)
+- [📞 支持](#-支持)
+- [📜 行为准则](#-行为准则)
 - [📄 许可证](#-许可证)
 
 ---
@@ -551,81 +560,183 @@ interface FilteringResult {
 
 ## 🤝 贡献指南
 
-我们欢迎贡献！请遵循以下指南以获得最佳开发体验。
+我们欢迎所有人的贡献！Claude 日志查看器因社区参与而蓬勃发展。
+
+### 🚀 **快速贡献指南**
+
+1. **阅读指南**: 查看我们的[贡献指南](CONTRIBUTING.md)获取详细说明
+2. **选择您的贡献**:
+   - 🐛 [报告错误](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=bug_report.md)
+   - ✨ [请求功能](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=feature_request.md)
+   - ⚡ [报告性能问题](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=performance_issue.md)
+   - 🔒 [报告安全问题](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=security_report.md)
+3. **提交代码**: Fork、开发、测试并创建 Pull Request
 
 ### 📋 **开发工作流程**
 
-1. **Fork 与克隆**: Fork 仓库并本地克隆
-2. **分支**: 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. **开发**: 使用测试进行更改
-4. **测试**: 运行完整测试套件 (`npm run test:full-suite`)
-5. **提交**: 使用约定提交 (`git commit -m 'feat: add amazing feature'`)
-6. **推送**: 推送到您的 fork (`git push origin feature/amazing-feature`)
-7. **PR**: 创建带详细描述的 Pull Request
-
-### ✅ **贡献检查清单**
-
-- [ ] **代码质量**: ESLint 无错误通过
-- [ ] **测试**: 新功能包含全面测试
-- [ ] **性能**: 无性能回归
-- [ ] **无障碍**: 保持 Web 内容无障碍指南 2.1 AA 合规
-- [ ] **文档**: README 和内联文档已更新
-- [ ] **响应式**: 在所有支持设备上工作
-- [ ] **浏览器支持**: 在 Chrome、Firefox、Safari、Edge 中测试
-
-### 🧪 **测试要求**
-
-所有贡献都必须包括:
-- 新功能的**单元测试**
-- 组件交互的**集成测试**
-- 优化功能的**性能测试**
-- UI 更改的**无障碍测试**
-- 用户工作流程的**端到端测试**
-
 ```bash
-# 提交 PR 之前，确保所有测试通过：
+# Fork 并克隆仓库
+git clone https://github.com/YOUR-USERNAME/Claude-Log-View.git
+cd Claude-Log-View
+
+# 安装依赖
+npm install
+
+# 创建功能分支
+git checkout -b feature/amazing-feature
+
+# 进行更改并测试
 npm run test:full-suite
 npm run lint
 npm run build
+
+# 提交并推送
+git commit -m 'feat: add amazing feature'
+git push origin feature/amazing-feature
 ```
+
+### 🎯 **贡献领域**
+
+- **🐛 错误修复**: 帮助我们修复错误并提高稳定性
+- **✨ 新功能**: 添加对所有用户有益的功能
+- **⚡ 性能优化**: 优化速度、内存使用和用户体验
+- **♿ 无障碍改进**: 提高 WCAG 合规性和可用性
+- **📚 文档完善**: 增强指南、示例和 API 文档
+- **🧪 测试增强**: 提高测试覆盖率和质量
+- **🎨 UI/UX**: 改进设计和用户界面
+
+### 🏆 **贡献者认可**
+
+贡献者通过以下方式获得认可:
+- GitHub 贡献者统计
+- 发布说明提及
+- 社区讨论
+
+详细指南请阅读我们的[贡献指南](CONTRIBUTING.md)。
 
 ---
 
 ## 📞 支持
 
-- **文档**: 此 README 提供全面指导
-- **问题**: [GitHub Issues](https://github.com/zengwenliang416/Claude-Log-View/issues)
-- **讨论**: [GitHub Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions)
-- **性能**: 查看 [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
-- **测试**: 查看 [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
+需要帮助吗？我们随时为您提供支持！
+
+### 💬 **获取帮助**
+
+- **📖 文档**: 此 README 和我们的[综合文档](docs/)
+- **💭 讨论**: [GitHub 讨论](https://github.com/zengwenliang416/Claude-Log-View/discussions)用于问题和想法
+- **🐛 错误报告**: 使用我们的模板[创建问题](https://github.com/zengwenliang416/Claude-Log-View/issues/new/choose)
+- **💡 功能请求**: [请求功能](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=feature_request.md)
+
+### 📚 **资源**
+
+- **🚀 性能指南**: [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
+- **🧪 测试文档**: [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
+- **🔒 安全政策**: [SECURITY.md](SECURITY.md)
+- **🤝 贡献指南**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **📜 变更日志**: [CHANGELOG.md](CHANGELOG.md)
+
+### 🆘 **快速获取帮助**
+
+1. **先搜索**: 检查[现有问题](https://github.com/zengwenliang416/Claude-Log-View/issues)和[讨论](https://github.com/zengwenliang416/Claude-Log-View/discussions)
+2. **使用模板**: 我们的问题模板帮助您提供正确的信息
+3. **具体描述**: 包含浏览器、文件大小、错误消息和复现步骤
+4. **社区支持**: 其他用户和维护者会为您提供帮助
+
+---
+
+## 🛡️ 安全政策
+
+安全是 Claude 日志查看器的首要任务。我们认真对待安全问题，并实施了全面措施保护我们的用户。
+
+### 🔐 **安全功能**
+
+- **本地处理**: 所有数据保留在您的设备上 - 不上传任何内容
+- **输入验证**: 全面的文件类型和内容验证
+- **XSS 保护**: 内容清理防止脚本注入
+- **内存安全**: 自动清理和内存管理
+- **CSP 实现**: 内容安全政策提供额外保护
+
+### 🚨 **报告安全问题**
+
+- **非关键问题**: 使用我们的[安全报告模板](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=security_report.md)
+- **关键问题**: 直接联系维护者（参见 [SECURITY.md](SECURITY.md)）
+- **协调披露**: 我们遵循负责任的披露实践
+
+详细安全信息请阅读我们的[安全政策](SECURITY.md)。
+
+---
+
+## 📜 行为准则
+
+我们致力于为每个人提供欢迎和包容的环境。我们的社区遵循[贡献者契约行为准则](CODE_OF_CONDUCT.md)。
+
+### 🤝 **我们的标准**
+
+- **尊重他人**: 以尊重和善意对待每个人
+- **包容性**: 欢迎所有背景和经验水平的人
+- **建设性**: 提供有用的反馈和建设性批评
+- **专业性**: 在所有互动中保持专业性
+
+### 📢 **报告问题**
+
+如果您遇到或目睹不可接受的行为，请报告：
+- **GitHub 问题**: 用于非敏感事项
+- **直接联系**: 用于需要隐私的严重问题
+
+更多详情请参见我们的[行为准则](CODE_OF_CONDUCT.md)。
 
 ---
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证。
+本项目采用 [MIT 许可证](LICENSE)。您可以根据许可证条款自由使用、修改和分发本软件。
 
 ---
 
 ## 🙏 致谢
 
-- **Vue.js 团队** - 出色的 Vue 3 框架
-- **Vite 团队** - 闪电般快速的构建工具
-- **Three.js 社区** - 3D 图形功能
-- **Tailwind CSS** - 实用优先的 CSS 框架
-- **Claude AI** - 灵感和对话日志格式
-- **开源社区** - 持续反馈和贡献
+Claude 日志查看器的存在要感谢令人惊叹的开源社区：
+
+### 🛠️ **核心技术**
+- **[Vue.js 团队](https://vuejs.org/)** - 出色的 Vue 3 框架
+- **[Vite 团队](https://vitejs.dev/)** - 闪电般快速的构建工具
+- **[Three.js 社区](https://threejs.org/)** - 令人惊叹的 3D 图形功能
+- **[Tailwind CSS](https://tailwindcss.com/)** - 实用优先的 CSS 框架
+- **[Highlight.js](https://highlightjs.org/)** - 优美的语法高亮
+
+### 💡 **灵感来源**
+- **[Claude AI](https://claude.ai/)** - 灵感和对话日志格式
+- **[GitHub](https://github.com/)** - 托管和社区功能
+- **[贡献者契约](https://www.contributor-covenant.org/)** - 社区准则
+
+### 👥 **社区**
+- **贡献者** - 每个贡献代码、文档或反馈的人
+- **用户** - 那些使用、测试并提供宝贵反馈的人
+- **开源社区** - 持续的灵感和最佳实践
 
 ---
 
 <div align="center">
 
-**⭐ 如果这个仓库对您有帮助，请为它点星! ⭐**
+## 🌟 **表达您的支持**
 
-**用 ❤️ 由 Claude Log Viewer 团队制作**
+**如果 Claude 日志查看器对您有帮助，请考虑：**
+
+⭐ **为此仓库点星**  
+🐛 **报告问题**  
+✨ **贡献功能**  
+📢 **与他人分享**  
+💬 **参与讨论**  
+
+---
+
+**用 ❤️ 由 Claude 日志查看器社区制作**
 
 [![使用 Vue 3 构建](https://img.shields.io/badge/Built%20with-Vue%203-4FC08D.svg?style=flat&logo=vue.js)](https://vuejs.org/)
 [![由 Vite 驱动](https://img.shields.io/badge/Powered%20by-Vite-646CFF.svg?style=flat&logo=vite)](https://vitejs.dev/)
 [![使用 TailwindCSS 样式化](https://img.shields.io/badge/Styled%20with-TailwindCSS-38B2AC.svg?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+[![社区驱动](https://img.shields.io/badge/Community-Driven-ff69b4.svg)](https://github.com/zengwenliang416/Claude-Log-View/graphs/contributors)
+
+**[📚 文档](docs/) • [🐛 问题](https://github.com/zengwenliang416/Claude-Log-View/issues) • [💭 讨论](https://github.com/zengwenliang416/Claude-Log-View/discussions) • [🔒 安全](SECURITY.md)**
 
 </div>

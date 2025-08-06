@@ -19,9 +19,15 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-ESM-3178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.17-38B2AC.svg?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.179-000000.svg?style=flat&logo=three.js)](https://threejs.org/)
+
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/ci.yml/badge.svg)](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/ci.yml)
+[![Quality Gate](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/zengwenliang416/Claude-Log-View/actions/workflows/quality-gate.yml)
 [![Quality Score](https://img.shields.io/badge/Quality%20Score-98.7%25-brightgreen.svg)](tests/TESTING_SUMMARY.md)
 [![Performance](https://img.shields.io/badge/Performance-70%25%20Faster-orange.svg)](PERFORMANCE_IMPROVEMENTS.md)
+[![Security](https://img.shields.io/badge/Security-Hardened-blue.svg)](SECURITY.md)
+[![Contributing](https://img.shields.io/badge/Contributing-Welcome-ff69b4.svg)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-Contributor%20Covenant-green.svg)](CODE_OF_CONDUCT.md)
 
 ---
 
@@ -50,6 +56,9 @@ Claude Log Viewer is a **cutting-edge Vue 3 web application** designed for parsi
 - [💻 Development](#-development)
 - [📚 API Reference](#-api-reference)
 - [🤝 Contributing](#-contributing)
+- [🛡️ Security](#-security)
+- [📞 Support](#-support)
+- [📜 Code of Conduct](#-code-of-conduct)
 - [📄 License](#-license)
 
 ---
@@ -564,81 +573,183 @@ interface FilteringResult {
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow the guidelines below for the best development experience.
+We welcome contributions from everyone! Claude Log Viewer thrives on community involvement.
+
+### 🚀 **Quick Contribution Guide**
+
+1. **Read the Guidelines**: Check our [Contributing Guide](CONTRIBUTING.md) for detailed instructions
+2. **Choose Your Contribution**:
+   - 🐛 [Report bugs](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=bug_report.md)
+   - ✨ [Request features](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=feature_request.md)
+   - ⚡ [Report performance issues](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=performance_issue.md)
+   - 🔒 [Report security issues](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=security_report.md)
+3. **Submit Code**: Fork, develop, test, and create a Pull Request
 
 ### 📋 **Development Workflow**
 
-1. **Fork & Clone**: Fork the repository and clone locally
-2. **Branch**: Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Develop**: Make your changes with tests
-4. **Test**: Run the full test suite (`npm run test:full-suite`)
-5. **Commit**: Use conventional commits (`git commit -m 'feat: add amazing feature'`)
-6. **Push**: Push to your fork (`git push origin feature/amazing-feature`)
-7. **PR**: Create a Pull Request with detailed description
-
-### ✅ **Contribution Checklist**
-
-- [ ] **Code Quality**: ESLint passes without errors
-- [ ] **Testing**: New features include comprehensive tests
-- [ ] **Performance**: No performance regressions
-- [ ] **Accessibility**: Web Content Accessibility Guidelines 2.1 AA compliance maintained  
-- [ ] **Documentation**: README and inline docs updated
-- [ ] **Responsive**: Works across all supported devices
-- [ ] **Browser Support**: Tested in Chrome, Firefox, Safari, Edge
-
-### 🧪 **Testing Requirements**
-
-All contributions must include:
-- **Unit tests** for new functionality
-- **Integration tests** for component interactions  
-- **Performance tests** for optimization features
-- **Accessibility tests** for UI changes
-- **E2E tests** for user workflows
-
 ```bash
-# Before submitting PR, ensure all tests pass:
+# Fork and clone the repository
+git clone https://github.com/YOUR-USERNAME/Claude-Log-View.git
+cd Claude-Log-View
+
+# Install dependencies
+npm install
+
+# Create a feature branch
+git checkout -b feature/amazing-feature
+
+# Make your changes and test
 npm run test:full-suite
 npm run lint
 npm run build
+
+# Commit and push
+git commit -m 'feat: add amazing feature'
+git push origin feature/amazing-feature
 ```
+
+### 🎯 **Contribution Areas**
+
+- **🐛 Bug Fixes**: Help us squash bugs and improve stability
+- **✨ New Features**: Add functionality that benefits all users
+- **⚡ Performance**: Optimize speed, memory usage, and user experience
+- **♿ Accessibility**: Improve WCAG compliance and usability
+- **📚 Documentation**: Enhance guides, examples, and API docs
+- **🧪 Testing**: Increase test coverage and quality
+- **🎨 UI/UX**: Improve design and user interface
+
+### 🏆 **Recognition**
+
+Contributors are recognized through:
+- GitHub contributor statistics
+- Release notes mentions
+- Community discussions
+
+For detailed guidelines, please read our [Contributing Guide](CONTRIBUTING.md).
 
 ---
 
 ## 📞 Support
 
-- **Documentation**: This README provides comprehensive guidance
-- **Issues**: [GitHub Issues](https://github.com/zengwenliang416/Claude-Log-View/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions)
-- **Performance**: See [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
-- **Testing**: See [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
+Need help? We're here to support you!
+
+### 💬 **Get Help**
+
+- **📖 Documentation**: This README and our [comprehensive docs](docs/)
+- **💭 Discussions**: [GitHub Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions) for questions and ideas
+- **🐛 Bug Reports**: [Create an issue](https://github.com/zengwenliang416/Claude-Log-View/issues/new/choose) with our templates
+- **💡 Feature Requests**: [Request features](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=feature_request.md)
+
+### 📚 **Resources**
+
+- **🚀 Performance Guide**: [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
+- **🧪 Testing Documentation**: [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
+- **🔒 Security Policy**: [SECURITY.md](SECURITY.md)
+- **🤝 Contributing Guide**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **📜 Changelog**: [CHANGELOG.md](CHANGELOG.md)
+
+### 🆘 **Getting Quick Help**
+
+1. **Search First**: Check [existing issues](https://github.com/zengwenliang416/Claude-Log-View/issues) and [discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions)
+2. **Use Templates**: Our issue templates help you provide the right information
+3. **Be Specific**: Include browser, file size, error messages, and steps to reproduce
+4. **Community Support**: Other users and maintainers are here to help
+
+---
+
+## 🛡️ Security
+
+Security is a top priority for Claude Log Viewer. We take security seriously and have implemented comprehensive measures to protect our users.
+
+### 🔐 **Security Features**
+
+- **Local Processing**: All data stays on your device - nothing is uploaded
+- **Input Validation**: Comprehensive file type and content validation
+- **XSS Protection**: Content sanitization prevents script injection
+- **Memory Safety**: Automatic cleanup and memory management
+- **CSP Implementation**: Content Security Policy for additional protection
+
+### 🚨 **Report Security Issues**
+
+- **Non-Critical**: Use our [Security Report Template](https://github.com/zengwenliang416/Claude-Log-View/issues/new?template=security_report.md)
+- **Critical Issues**: Contact maintainers directly (see [SECURITY.md](SECURITY.md))
+- **Coordinated Disclosure**: We follow responsible disclosure practices
+
+For detailed security information, please read our [Security Policy](SECURITY.md).
+
+---
+
+## 📜 Code of Conduct
+
+We are committed to providing a welcoming and inclusive environment for everyone. Our community follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
+
+### 🤝 **Our Standards**
+
+- **Be Respectful**: Treat everyone with respect and kindness
+- **Be Inclusive**: Welcome people of all backgrounds and experience levels
+- **Be Constructive**: Provide helpful feedback and constructive criticism
+- **Be Professional**: Maintain professionalism in all interactions
+
+### 📢 **Reporting Issues**
+
+If you experience or witness unacceptable behavior, please report it:
+- **GitHub Issues**: For non-sensitive matters
+- **Direct Contact**: For serious issues requiring privacy
+
+For more details, see our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute this software in accordance with the license terms.
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Vue.js Team** - For the excellent Vue 3 framework
-- **Vite Team** - For the lightning-fast build tool
-- **Three.js Community** - For 3D graphics capabilities
-- **Tailwind CSS** - For the utility-first CSS framework
-- **Claude AI** - For inspiration and conversation log format
-- **Open Source Community** - For continuous feedback and contributions
+Claude Log Viewer exists thanks to the amazing open source community:
+
+### 🛠️ **Core Technologies**
+- **[Vue.js Team](https://vuejs.org/)** - For the excellent Vue 3 framework
+- **[Vite Team](https://vitejs.dev/)** - For the lightning-fast build tool
+- **[Three.js Community](https://threejs.org/)** - For stunning 3D graphics capabilities
+- **[Tailwind CSS](https://tailwindcss.com/)** - For the utility-first CSS framework
+- **[Highlight.js](https://highlightjs.org/)** - For beautiful syntax highlighting
+
+### 💡 **Inspiration**
+- **[Claude AI](https://claude.ai/)** - For inspiration and conversation log format
+- **[GitHub](https://github.com/)** - For hosting and community features
+- **[Contributor Covenant](https://www.contributor-covenant.org/)** - For community guidelines
+
+### 👥 **Community**
+- **Contributors** - Everyone who has contributed code, documentation, or feedback
+- **Users** - Those who use, test, and provide valuable feedback
+- **Open Source Community** - For continuous inspiration and best practices
 
 ---
 
 <div align="center">
 
-**⭐ Star this repository if it helped you! ⭐**
+## 🌟 **Show Your Support**
 
-**Made with ❤️ by the Claude Log Viewer Team**
+**If Claude Log Viewer has helped you, please consider:**
+
+⭐ **Star this repository**  
+🐛 **Report issues**  
+✨ **Contribute features**  
+📢 **Share with others**  
+💬 **Join discussions**  
+
+---
+
+**Made with ❤️ by the Claude Log Viewer Community**
 
 [![Built with Vue 3](https://img.shields.io/badge/Built%20with-Vue%203-4FC08D.svg?style=flat&logo=vue.js)](https://vuejs.org/)
 [![Powered by Vite](https://img.shields.io/badge/Powered%20by-Vite-646CFF.svg?style=flat&logo=vite)](https://vitejs.dev/)
 [![Styled with TailwindCSS](https://img.shields.io/badge/Styled%20with-TailwindCSS-38B2AC.svg?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+[![Community Driven](https://img.shields.io/badge/Community-Driven-ff69b4.svg)](https://github.com/zengwenliang416/Claude-Log-View/graphs/contributors)
+
+**[📚 Documentation](docs/) • [🐛 Issues](https://github.com/zengwenliang416/Claude-Log-View/issues) • [💭 Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions) • [🔒 Security](SECURITY.md)**
 
 </div>
