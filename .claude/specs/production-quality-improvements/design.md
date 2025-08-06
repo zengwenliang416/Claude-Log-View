@@ -74,10 +74,10 @@ const placeholderPatterns = [
 
 // Replacement with actual repository URL
 const actualRepository = {
-  url: 'https://github.com/wenliang-zeng/Claude-Log-View.git',
-  homepage: 'https://github.com/wenliang-zeng/Claude-Log-View',
-  issues: 'https://github.com/wenliang-zeng/Claude-Log-View/issues',
-  discussions: 'https://github.com/wenliang-zeng/Claude-Log-View/discussions'
+  url: 'https://github.com/zengwenliang416/Claude-Log-View.git',
+  homepage: 'https://github.com/zengwenliang416/Claude-Log-View',
+  issues: 'https://github.com/zengwenliang416/Claude-Log-View/issues',
+  discussions: 'https://github.com/zengwenliang416/Claude-Log-View/discussions'
 }
 ```
 

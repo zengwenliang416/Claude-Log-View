@@ -65,7 +65,7 @@ Claude Log Viewer is a **cutting-edge Vue 3 web application** designed for parsi
 
 ```bash
 # Clone the repository
-git clone https://github.com/wenliang-zeng/Claude-Log-View.git
+git clone https://github.com/zengwenliang416/Claude-Log-View.git
 cd Claude-Log-View
 
 # Install dependencies
@@ -607,8 +607,8 @@ npm run build
 ## 📞 Support
 
 - **Documentation**: This README provides comprehensive guidance
-- **Issues**: [GitHub Issues](https://github.com/wenliang-zeng/Claude-Log-View/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/wenliang-zeng/Claude-Log-View/discussions)
+- **Issues**: [GitHub Issues](https://github.com/zengwenliang416/Claude-Log-View/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions)
 - **Performance**: See [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
 - **Testing**: See [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
 

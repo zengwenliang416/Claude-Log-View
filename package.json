@@ -13,18 +13,18 @@
     "three.js",
     "tailwindcss"
   ],
-  "homepage": "https://github.com/wenliang-zeng/Claude-Log-View#readme",
+  "homepage": "https://github.com/zengwenliang416/Claude-Log-View#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wenliang-zeng/Claude-Log-View.git"
+    "url": "https://github.com/zengwenliang416/Claude-Log-View.git"
   },
   "bugs": {
-    "url": "https://github.com/wenliang-zeng/Claude-Log-View/issues"
+    "url": "https://github.com/zengwenliang416/Claude-Log-View/issues"
   },
   "license": "MIT",
   "author": {
     "name": "Claude Log Viewer Team",
-    "url": "https://github.com/wenliang-zeng/Claude-Log-View"
+    "url": "https://github.com/zengwenliang416/Claude-Log-View"
   },
   "private": true,
   "type": "module",

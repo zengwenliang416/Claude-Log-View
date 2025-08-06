@@ -25,4 +25,4 @@ When contributing to documentation:
 - Maintain the same structure and section order across languages
 - Use appropriate localized examples and references
 
-For questions about documentation or translations, please [open an issue](https://github.com/wenliang-zeng/Claude-Log-View/issues).
+For questions about documentation or translations, please [open an issue](https://github.com/zengwenliang416/Claude-Log-View/issues).

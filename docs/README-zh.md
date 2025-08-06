@@ -74,7 +74,7 @@ Claude 日志查看器是一个**前沿的 Vue 3 Web 应用程序**，专为解�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/wenliang-zeng/Claude-Log-View.git
+git clone https://github.com/zengwenliang416/Claude-Log-View.git
 cd Claude-Log-View
 
 # 安装依赖
@@ -594,8 +594,8 @@ npm run build
 ## 📞 支持
 
 - **文档**: 此 README 提供全面指导
-- **问题**: [GitHub Issues](https://github.com/wenliang-zeng/Claude-Log-View/issues)
-- **讨论**: [GitHub Discussions](https://github.com/wenliang-zeng/Claude-Log-View/discussions)
+- **问题**: [GitHub Issues](https://github.com/zengwenliang416/Claude-Log-View/issues)
+- **讨论**: [GitHub Discussions](https://github.com/zengwenliang416/Claude-Log-View/discussions)
 - **性能**: 查看 [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md)
 - **测试**: 查看 [tests/TESTING_SUMMARY.md](tests/TESTING_SUMMARY.md)
 
