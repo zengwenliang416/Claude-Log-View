@@ -20,8 +20,10 @@ Generate professional git commit messages using the git-commit-generator agent w
 **Usage Examples:**
 - `/commit` - Interactive mode with file selection and batch options
 - `/commit ENG` - Generate English commit message with smart staging
-- `/commit ch --batch` - Chinese batch commit mode
+- `/commit ch` - Chinese commit message generation
+- `/commit --batch` - Automatic batch processing mode
 - `/commit --interactive` - Full interactive file selection mode
+- `/commit --no-signature` - Explicitly enforce no signature addition
 
 **Smart File Staging:**
 - Analyze changed files and group by feature/module
@@ -38,7 +40,9 @@ Generate professional git commit messages using the git-commit-generator agent w
 - Add detailed bullet-point descriptions after two blank lines
 - Each detail starts with "- " prefix
 - Generate both Chinese and English versions
-- NO signature addition
+- ABSOLUTELY NO signature addition (strictly enforced)
+- Never include "🤖 Generated with Claude Code" or "Co-Authored-By" signatures
+- Warn if automatic signatures are detected in commit
 
 **Batch Commit Workflow:**
 1. Analyze all changed files and group by logical features
@@ -85,4 +89,15 @@ Options:
 - <detailed description 3>
 ```
 
-The agent will intelligently handle multi-feature scenarios and provide optimal batching strategies.
+The agent will intelligently handle multi-feature scenarios and provide optimal batching strategies. All commits are generated WITHOUT signatures or attribution to maintain clean commit history.
+
+**🚨 Signature Issue Resolution:**
+If signatures are automatically added by Claude Code's git integration, the agent will:
+1. Detect and warn about unwanted signatures
+2. Provide clean commit message without signatures  
+3. Suggest `git commit --amend` to fix the message
+4. Recommend checking git configuration or Claude Code settings
+
+**Additional Options:**
+- `--clean` - Double-check for and remove any automatic signatures
+- `--amend` - Automatically offer to amend last commit if signatures detected
