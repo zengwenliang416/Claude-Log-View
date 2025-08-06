@@ -43,7 +43,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:accessibility": "playwright test --grep @accessibility",
     "test:performance": "playwright test --grep @performance",
-    "test:unit": "vitest run tests/unit",
+    "test:unit": "vitest run tests/unit/components/*-simple.test.js tests/unit/components/*-fixed.test.js tests/unit/core-functionality.test.js",
     "test:integration": "vitest run tests/integration",
     "test:performance-unit": "vitest run tests/performance",
     "test:critical": "vitest run tests/unit/components/LogViewer-simple.test.js tests/unit/components/FileUpload-simple.test.js tests/unit/core-functionality.test.js",
@@ -57,7 +57,9 @@
     "test:ui-visual": "playwright test tests/visual-regression/ui-visual-tests.spec.js",
     "test:ui-e2e": "playwright test tests/e2e/ui-enhancements.spec.js",
     "test:ui-suite": "node tests/run-ui-enhancement-tests.js",
-    "test:benchmark": "vitest run tests/performance/scrolling-performance.test.js --reporter=verbose"
+    "test:benchmark": "vitest run tests/performance/scrolling-performance.test.js --reporter=verbose",
+    "test:working": "vitest run tests/unit/components/LogViewer-simple.test.js tests/unit/components/FileUpload-simple.test.js tests/unit/components/FileUpload-fixed.test.js tests/unit/core-functionality.test.js",
+    "test:legacy": "vitest run tests/unit --exclude 'tests/unit/components/*-simple.test.js' --exclude 'tests/unit/components/*-fixed.test.js' --exclude 'tests/unit/core-functionality.test.js'"
   },
   "engines": {
     "node": ">=18.0.0",

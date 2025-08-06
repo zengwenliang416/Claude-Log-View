@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { injectAxe, checkA11y } from '@axe-core/playwright'
+import AxeBuilder from '@axe-core/playwright'
 
 test.describe('UI/UX Enhancements E2E Tests', () => {
   const sampleJsonl = `{"uuid": "1", "type": "user", "message": {"content": "Hello Claude"}}
@@ -453,14 +453,12 @@ test.describe('UI/UX Enhancements E2E Tests', () => {
 
   test.describe('Accessibility Compliance @accessibility', () => {
     test('should pass axe accessibility checks', async ({ page }) => {
-      await injectAxe(page)
-      await checkA11y(page, '.filter-controls', {
-        rules: {
-          'color-contrast': { enabled: true },
-          'keyboard': { enabled: true },
-          'focus-order-semantics': { enabled: true }
-        }
-      })
+      const accessibilityScanResults = await new AxeBuilder({ page })
+        .include('.filter-controls')
+        .withRules(['color-contrast', 'keyboard', 'focus-order-semantics'])
+        .analyze()
+      
+      expect(accessibilityScanResults.violations).toEqual([])
     })
 
     test('should support keyboard navigation', async ({ page }) => {

@@ -1,17 +1,16 @@
 import { test, expect } from '@playwright/test'
-import { injectAxe, checkA11y, getViolations } from '@axe-core/playwright'
+import AxeBuilder from '@axe-core/playwright'
 
 test.describe('Accessibility Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
-    await injectAxe(page)
   })
 
   test('should have no accessibility violations on initial load @accessibility', async ({ page }) => {
-    await checkA11y(page, null, {
-      detailedReport: true,
-      detailedReportOptions: { html: true }
-    })
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .analyze()
+    
+    expect(accessibilityScanResults.violations).toEqual([])
   })
 
   test('should have proper heading structure @accessibility', async ({ page }) => {
@@ -109,11 +108,11 @@ test.describe('Accessibility Tests', () => {
 
   test('should have proper color contrast @accessibility', async ({ page }) => {
     // This would typically require axe-core color contrast checking
-    await checkA11y(page, null, {
-      rules: {
-        'color-contrast': { enabled: true }
-      }
-    })
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withRules(['color-contrast'])
+      .analyze()
+    
+    expect(accessibilityScanResults.violations).toEqual([])
   })
 
   test('should work with high contrast mode @accessibility', async ({ page }) => {
@@ -131,7 +130,8 @@ test.describe('Accessibility Tests', () => {
     await expect(page.locator('.message-display')).toBeVisible()
     
     // Check that content is still visible and accessible
-    await checkA11y(page)
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+    expect(accessibilityScanResults.violations).toEqual([])
   })
 
   test('should support zoom up to 200% @accessibility', async ({ page }) => {
@@ -291,7 +291,8 @@ test.describe('Accessibility Tests', () => {
     await expect(page.locator('.message-display')).toBeVisible()
 
     // Run comprehensive accessibility audit
-    const violations = await getViolations(page)
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+    const violations = accessibilityScanResults.violations
     
     if (violations.length > 0) {
       console.log('Accessibility violations found:', violations)
